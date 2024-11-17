@@ -7,6 +7,7 @@
 #include "SemanticError.h"
 #include "loguru.hpp"
 #include "llvm/Support/CommandLine.h"
+#include "Lsp.h"
 
 #include <fstream>
 
@@ -25,6 +26,9 @@ static cl::opt<bool> polyinf("pi",
                              cl::desc("perform polymorphic type inference"),
                              cl::cat(TIPcat));
 static cl::opt<bool> disopt("do", cl::desc("disable bitcode optimization"),
+                            cl::cat(TIPcat));
+
+static cl::opt<bool> lsp("lsp", cl::desc("starts the language server for tip"),
                             cl::cat(TIPcat));
 static cl::opt<int> debug(
     "verbose",
@@ -80,6 +84,10 @@ int main(int argc, char *argv[]) {
                        loguru::Verbosity_MAX);
     }
   }
+  if (lsp) {
+      cout << "Running LSP" << endl;
+      return 0;
+  };
 
   std::ifstream stream;
   stream.open(sourceFile);

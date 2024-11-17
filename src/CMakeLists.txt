@@ -8,6 +8,7 @@ add_subdirectory(frontend)
 add_subdirectory(semantic)
 add_subdirectory(codegen)
 add_subdirectory(optimizer)
+add_subdirectory(lsp)
 
 target_link_libraries(
   tipc
@@ -19,7 +20,9 @@ target_link_libraries(
           antlr4_static
           ${llvm_libs}
           coverage_config
-          loguru)
+          loguru
+          lsp)
+
 target_include_directories(
   tipc
   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/error
@@ -36,4 +39,5 @@ target_include_directories(
           ${CMAKE_CURRENT_SOURCE_DIR}/semantic/types/solver
           ${CMAKE_CURRENT_SOURCE_DIR}/semantic/weeding
           ${CMAKE_CURRENT_SOURCE_DIR}/codegen
+          ${CMAKE_CURRENT_SOURCE_DIR}/lsp
           ${CMAKE_CURRENT_SOURCE_DIR}/optimizer)

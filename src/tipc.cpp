@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
     }
   }
   if (lsp) {
-      cout << "Running LSP" << endl;
+      startLsp();
       return 0;
   };
 

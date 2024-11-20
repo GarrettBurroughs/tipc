@@ -4,6 +4,4 @@
 
 using json = nlohmann::json;
 
-void startLsp() {
-    std::cout << "Starting lsp" << std::endl;
-}
+void startLsp() { std::cout << "Starting lsp" << std::endl; }

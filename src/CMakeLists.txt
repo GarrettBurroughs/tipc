@@ -21,7 +21,8 @@ target_link_libraries(
           ${llvm_libs}
           coverage_config
           loguru
-          lsp)
+          lsp
+          nlohmann_json::nlohmann_json)
 
 target_include_directories(
   tipc

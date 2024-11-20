@@ -107,6 +107,15 @@ include_directories(${CMAKE_SOURCE_DIR}/externals/loguru)
 # build target including unit tests ###########
 add_subdirectory(src)
 
+# JSON Parsing
+FetchContent_Declare(
+    json
+    GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_TAG v3.11.2 # Replace with the latest stable version if necessary
+)
+
+FetchContent_MakeAvailable(json)
+
 
 FetchContent_Declare(
   Catch2

@@ -8,6 +8,7 @@
 #include "loguru.hpp"
 #include "llvm/Support/CommandLine.h"
 #include "Lsp.h"
+#include <nlohmann/json.hpp>
 
 #include <fstream>
 

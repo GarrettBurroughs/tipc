@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tipc: /home/runner/work/tipc/tipc/src/lsp/Lsp.cpp File Reference</title>
+<title>tipc: StreamParser Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,77 +60,79 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_46354631072136ba50f9f8bd6a895813.html">lsp</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="classStreamParser-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Lsp.cpp File Reference</div>  </div>
+<div class="title">StreamParser Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="Lsp_8h_source.html">Lsp.h</a>&quot;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;nlohmann/json.hpp&gt;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for Lsp.cpp:</div>
-<div class="dyncontent">
-<div class="center"><img src="Lsp_8cpp__incl.png" border="0" usemap="#a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2Lsp_8cpp" alt=""/></div>
-<map name="a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2Lsp_8cpp" id="a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2Lsp_8cpp">
-<area shape="rect" title=" " alt="" coords="39,5,212,47"/>
-<area shape="rect" href="Lsp_8h.html" title=" " alt="" coords="5,95,61,121"/>
-<area shape="rect" title=" " alt="" coords="85,95,165,121"/>
-<area shape="rect" title=" " alt="" coords="189,95,336,121"/>
-</map>
-</div>
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:ab701e3ac61a85b337ec5c1abaad6742d"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Lsp_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d">json</a> = nlohmann::json</td></tr>
-<tr class="separator:ab701e3ac61a85b337ec5c1abaad6742d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a40d964be97e07431f482e283c899f332"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Lsp_8cpp.html#a40d964be97e07431f482e283c899f332">startLsp</a> ()</td></tr>
-<tr class="separator:a40d964be97e07431f482e283c899f332"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aed8b284b823614008757c4158bdeeb84"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStreamParser.html#aed8b284b823614008757c4158bdeeb84">StreamParser</a> (std::istream &amp;input)</td></tr>
+<tr class="separator:aed8b284b823614008757c4158bdeeb84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89f1f5ed4ecc2470228ae7c60e1573ee"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStreamParser.html#a89f1f5ed4ecc2470228ae7c60e1573ee">getNextToken</a> ()</td></tr>
+<tr class="separator:a89f1f5ed4ecc2470228ae7c60e1573ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="ab701e3ac61a85b337ec5c1abaad6742d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab701e3ac61a85b337ec5c1abaad6742d">&#9670;&nbsp;</a></span>json</h2>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aed8b284b823614008757c4158bdeeb84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed8b284b823614008757c4158bdeeb84">&#9670;&nbsp;</a></span>StreamParser()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="Lsp_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d">json</a> =  nlohmann::json</td>
+          <td class="memname">StreamParser::StreamParser </td>
+          <td>(</td>
+          <td class="paramtype">std::istream &amp;&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a40d964be97e07431f482e283c899f332"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40d964be97e07431f482e283c899f332">&#9670;&nbsp;</a></span>startLsp()</h2>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a89f1f5ed4ecc2470228ae7c60e1573ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89f1f5ed4ecc2470228ae7c60e1573ee">&#9670;&nbsp;</a></span>getNextToken()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void startLsp </td>
+          <td class="memname">std::string StreamParser::getNextToken </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>
 </div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>/home/runner/work/tipc/tipc/src/lsp/<a class="el" href="LSP_8cpp.html">LSP.cpp</a></li>
+</ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

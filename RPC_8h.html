@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>tipc: /home/runner/work/tipc/tipc/src/lsp/Lsp.h File Reference</title>
+<title>tipc: /home/runner/work/tipc/tipc/src/lsp/RPC.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,38 +69,71 @@ $(function() {
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">Lsp.h File Reference</div>  </div>
+<div class="title">RPC.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><div class="dynheader">
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;nlohmann/json.hpp&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for RPC.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="RPC_8h__incl.png" border="0" usemap="#a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2RPC_8h" alt=""/></div>
+<map name="a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2RPC_8h" id="a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2RPC_8h">
+<area shape="rect" title=" " alt="" coords="11,5,184,47"/>
+<area shape="rect" title=" " alt="" coords="5,95,64,121"/>
+<area shape="rect" title=" " alt="" coords="88,95,235,121"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><img src="Lsp_8h__dep__incl.png" border="0" usemap="#a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2Lsp_8hdep" alt=""/></div>
-<map name="a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2Lsp_8hdep" id="a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2Lsp_8hdep">
+<div class="center"><img src="RPC_8h__dep__incl.png" border="0" usemap="#a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2RPC_8hdep" alt=""/></div>
+<map name="a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2RPC_8hdep" id="a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2RPC_8hdep">
 <area shape="rect" title=" " alt="" coords="104,5,277,47"/>
-<area shape="rect" href="Lsp_8cpp.html" title=" " alt="" coords="5,95,179,136"/>
-<area shape="rect" href="tipc_8cpp.html" title=" " alt="" coords="203,95,376,136"/>
+<area shape="rect" href="LSP_8cpp.html" title=" " alt="" coords="5,95,179,136"/>
+<area shape="rect" href="RPC_8cpp.html" title=" " alt="" coords="203,95,376,136"/>
 </map>
 </div>
 </div>
-<p><a href="Lsp_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="RPC_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a40d964be97e07431f482e283c899f332"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Lsp_8h.html#a40d964be97e07431f482e283c899f332">startLsp</a> ()</td></tr>
-<tr class="separator:a40d964be97e07431f482e283c899f332"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c62429f8185aa7ee6775e4dd8efcf7b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="RPC_8h.html#a9c62429f8185aa7ee6775e4dd8efcf7b">EncodeMessage</a> (const <a class="el" href="RPC_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d">nlohmann::json</a> &amp;msg)</td></tr>
+<tr class="separator:a9c62429f8185aa7ee6775e4dd8efcf7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07f05153e2184476c8052028b4d075f9"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, std::vector&lt; uint8_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="RPC_8h.html#a07f05153e2184476c8052028b4d075f9">DecodeMessage</a> (const std::vector&lt; uint8_t &gt; &amp;msg)</td></tr>
+<tr class="separator:a07f05153e2184476c8052028b4d075f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a40d964be97e07431f482e283c899f332"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a40d964be97e07431f482e283c899f332">&#9670;&nbsp;</a></span>startLsp()</h2>
+<a id="a07f05153e2184476c8052028b4d075f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07f05153e2184476c8052028b4d075f9">&#9670;&nbsp;</a></span>DecodeMessage()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void startLsp </td>
+          <td class="memname">std::pair&lt;std::string, std::vector&lt;uint8_t&gt; &gt; DecodeMessage </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const std::vector&lt; uint8_t &gt; &amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9c62429f8185aa7ee6775e4dd8efcf7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c62429f8185aa7ee6775e4dd8efcf7b">&#9670;&nbsp;</a></span>EncodeMessage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string EncodeMessage </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="RPC_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d">nlohmann::json</a> &amp;&#160;</td>
+          <td class="paramname"><em>msg</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

@@ -73,12 +73,16 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:a2844e87d88338c0d2f538bb1188844df"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CMakeLists_8txt.html#a2844e87d88338c0d2f538bb1188844df">add_executable</a> (tipc) target_sources(tipc PUBLIC $</td></tr>
 <tr class="separator:a2844e87d88338c0d2f538bb1188844df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa81bab819f894756e83b018f2b6a4824"><td class="memItemLeft" align="right" valign="top">tipc cpp&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CMakeLists_8txt.html#aa81bab819f894756e83b018f2b6a4824">add_subdirectory</a> (error) add_subdirectory(frontend) add_subdirectory(semantic) add_subdirectory(codegen) add_subdirectory(optimizer) add_subdirectory(lsp) target_link_libraries(tipc PRIVATE error frontend semantic codegen optimizer antlr4_static $</td></tr>
-<tr class="separator:aa81bab819f894756e83b018f2b6a4824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a266c73a4a66a91c977369f4f54726f22"><td class="memItemLeft" align="right" valign="top">tipc cpp&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CMakeLists_8txt.html#a266c73a4a66a91c977369f4f54726f22">add_executable</a> (tiplsp) target_sources(tiplsp PUBLIC $</td></tr>
+<tr class="separator:a266c73a4a66a91c977369f4f54726f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d9cee0ef5923812b8e3f30c313ecb14"><td class="memItemLeft" align="right" valign="top">lsp LSP cpp&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CMakeLists_8txt.html#a9d9cee0ef5923812b8e3f30c313ecb14">add_subdirectory</a> (error) add_subdirectory(frontend) add_subdirectory(semantic) add_subdirectory(codegen) add_subdirectory(optimizer) add_subdirectory(lsp) target_link_libraries(tipc PRIVATE error frontend semantic codegen optimizer antlr4_static $</td></tr>
+<tr class="separator:a9d9cee0ef5923812b8e3f30c313ecb14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95e768c89cbd838b23eff818ffd63e76"><td class="memItemLeft" align="right" valign="top">coverage_config loguru nlohmann_json::nlohmann_json&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="CMakeLists_8txt.html#a95e768c89cbd838b23eff818ffd63e76">target_include_directories</a> (tipc PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/error ${CMAKE_CURRENT_SOURCE_DIR}/frontend ${CMAKE_CURRENT_SOURCE_DIR}/frontend/ast ${CMAKE_CURRENT_SOURCE_DIR}/frontend/ast/treetypes ${CMAKE_CURRENT_SOURCE_DIR}/frontend/prettyprint ${CMAKE_CURRENT_SOURCE_DIR}/semantic ${CMAKE_CURRENT_SOURCE_DIR}/semantic/cfa ${CMAKE_CURRENT_SOURCE_DIR}/semantic/symboltable ${CMAKE_CURRENT_SOURCE_DIR}/semantic/types ${CMAKE_CURRENT_SOURCE_DIR}/semantic/types/concrete ${CMAKE_CURRENT_SOURCE_DIR}/semantic/types/constraints ${CMAKE_CURRENT_SOURCE_DIR}/semantic/types/solver ${CMAKE_CURRENT_SOURCE_DIR}/semantic/weeding ${CMAKE_CURRENT_SOURCE_DIR}/codegen ${CMAKE_CURRENT_SOURCE_DIR}/optimizer) target_link_libraries(tiplsp PRIVATE error frontend semantic codegen optimizer antlr4_static $</td></tr>
+<tr class="separator:a95e768c89cbd838b23eff818ffd63e76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a2844e87d88338c0d2f538bb1188844df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2844e87d88338c0d2f538bb1188844df">&#9670;&nbsp;</a></span>add_executable()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2844e87d88338c0d2f538bb1188844df">&#9670;&nbsp;</a></span>add_executable() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -95,17 +99,53 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa81bab819f894756e83b018f2b6a4824"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa81bab819f894756e83b018f2b6a4824">&#9670;&nbsp;</a></span>add_subdirectory()</h2>
+<a id="a266c73a4a66a91c977369f4f54726f22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a266c73a4a66a91c977369f4f54726f22">&#9670;&nbsp;</a></span>add_executable() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">tipc cpp add_subdirectory </td>
+          <td class="memname">tipc cpp add_executable </td>
+          <td>(</td>
+          <td class="paramtype">tiplsp&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9d9cee0ef5923812b8e3f30c313ecb14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d9cee0ef5923812b8e3f30c313ecb14">&#9670;&nbsp;</a></span>add_subdirectory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">lsp LSP cpp add_subdirectory </td>
           <td>(</td>
           <td class="paramtype">error&#160;</td>
           <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a95e768c89cbd838b23eff818ffd63e76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95e768c89cbd838b23eff818ffd63e76">&#9670;&nbsp;</a></span>target_include_directories()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">coverage_config loguru nlohmann_json::nlohmann_json target_include_directories </td>
+          <td>(</td>
+          <td class="paramtype">tipc PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/error ${CMAKE_CURRENT_SOURCE_DIR}/frontend ${CMAKE_CURRENT_SOURCE_DIR}/frontend/ast ${CMAKE_CURRENT_SOURCE_DIR}/frontend/ast/treetypes ${CMAKE_CURRENT_SOURCE_DIR}/frontend/prettyprint ${CMAKE_CURRENT_SOURCE_DIR}/semantic ${CMAKE_CURRENT_SOURCE_DIR}/semantic/cfa ${CMAKE_CURRENT_SOURCE_DIR}/semantic/symboltable ${CMAKE_CURRENT_SOURCE_DIR}/semantic/types ${CMAKE_CURRENT_SOURCE_DIR}/semantic/types/concrete ${CMAKE_CURRENT_SOURCE_DIR}/semantic/types/constraints ${CMAKE_CURRENT_SOURCE_DIR}/semantic/types/solver ${CMAKE_CURRENT_SOURCE_DIR}/semantic/weeding ${CMAKE_CURRENT_SOURCE_DIR}/codegen ${CMAKE_CURRENT_SOURCE_DIR}/&#160;</td>
+          <td class="paramname"><em>optimizer</em></td><td>)</td>
           <td></td>
         </tr>
       </table>

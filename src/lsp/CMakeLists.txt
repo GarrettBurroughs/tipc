@@ -1,10 +1,10 @@
 add_library(lsp)
 
 target_sources(
-  lsp PRIVATE  ${CMAKE_CURRENT_SOURCE_DIR}/Lsp.h
-               ${CMAKE_CURRENT_SOURCE_DIR}/Lsp.cpp
-               ${CMAKE_CURRENT_SOURCE_DIR}/Rpc.h
-               ${CMAKE_CURRENT_SOURCE_DIR}/Rpc.cpp
+  lsp PRIVATE  ${CMAKE_CURRENT_SOURCE_DIR}/LSP.h
+               ${CMAKE_CURRENT_SOURCE_DIR}/LSP.cpp
+               ${CMAKE_CURRENT_SOURCE_DIR}/RPC.h
+               ${CMAKE_CURRENT_SOURCE_DIR}/RPC.cpp
            )
 
 target_include_directories(lsp PRIVATE)

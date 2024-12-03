@@ -5,8 +5,8 @@
 #include <iostream>
 #include <nlohmann/json.hpp>
 
-#include "Rpc.h"
-#include "Lsp.h"
+#include "RPC.h"
+#include "LSP.h"
 
 using json = nlohmann::json;
 

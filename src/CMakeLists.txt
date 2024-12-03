@@ -4,7 +4,7 @@ target_sources(tipc PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/tipc.cpp)
 
 # lsp binary target
 add_executable(tiplsp)
-target_sources(tiplsp PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/lsp/Lsp.cpp)
+target_sources(tiplsp PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/lsp/LSP.cpp)
 
 # Build the phase specific libraries
 add_subdirectory(error)

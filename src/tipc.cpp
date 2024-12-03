@@ -7,7 +7,6 @@
 #include "SemanticError.h"
 #include "loguru.hpp"
 #include "llvm/Support/CommandLine.h"
-#include "Lsp.h"
 #include <nlohmann/json.hpp>
 
 #include <fstream>
@@ -29,8 +28,6 @@ static cl::opt<bool> polyinf("pi",
 static cl::opt<bool> disopt("do", cl::desc("disable bitcode optimization"),
                             cl::cat(TIPcat));
 
-static cl::opt<bool> lsp("lsp", cl::desc("starts the language server for tip"),
-                            cl::cat(TIPcat));
 static cl::opt<int> debug(
     "verbose",
     cl::desc("enable log messages (Levels 1-3) \n Level 1 - Basic logging for "
@@ -85,10 +82,6 @@ int main(int argc, char *argv[]) {
                        loguru::Verbosity_MAX);
     }
   }
-  if (lsp) {
-      startLsp(std::cin, std::cout);
-      return 0;
-  };
 
   std::ifstream stream;
   stream.open(sourceFile);

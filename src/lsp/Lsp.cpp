@@ -2,6 +2,7 @@
 #include "Rpc.h"
 #include <exception>
 #include <iostream>
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -11,21 +12,15 @@ class StreamParser {
 public:
     explicit StreamParser(std::istream& input) : inputStream(input) {}
 
-    // Parses the next complete message from the stream
     std::string getNextToken() {
         while (true) {
-            // Read data into buffer if needed
-            if (buffer.empty() || buffer.size() < expectedSize) {
-                loadMoreData();
-            }
+            read();
 
-            // Try parsing the next token
             auto token = parseBuffer();
             if (!token.empty()) {
                 return token;
             }
 
-            // If we can't parse, load more data
             if (inputStream.eof()) {
                 throw std::runtime_error("Incomplete message at end of input");
             }
@@ -37,29 +32,24 @@ private:
     std::string buffer;
     size_t expectedSize = 0;
 
-    // Load more data into the buffer
-    void loadMoreData() {
-        std::string chunk;
-        char data[1024]; // Read in chunks of 1 KB
+    // TODO: Figure out if we can read more data at a time? 
+    void read() {
+        char data[1];
         inputStream.read(data, sizeof(data));
         buffer.append(data, inputStream.gcount());
     }
 
-    // Parse the buffer to extract a complete token
     std::string parseBuffer() {
         static const std::string separator = "\r\n\r\n";
 
-        // Find the header-content separator
         size_t separatorPos = buffer.find(separator);
         if (separatorPos == std::string::npos) {
             return ""; // Not enough data to determine a token
         }
 
-        // Extract the header and content
         std::string header = buffer.substr(0, separatorPos);
         std::string content = buffer.substr(separatorPos + separator.size());
 
-        // Parse the Content-Length
         static const std::string contentLengthPrefix = "Content-Length: ";
         size_t contentLengthPos = header.find(contentLengthPrefix);
         if (contentLengthPos == std::string::npos) {
@@ -67,35 +57,28 @@ private:
         }
         contentLengthPos += contentLengthPrefix.size();
 
-        size_t endOfNumber = header.find_first_of("\r\n", contentLengthPos);
-        if (endOfNumber == std::string::npos) {
-            throw std::runtime_error("Invalid Content-Length header");
-        }
-
-        std::string contentLengthStr = header.substr(contentLengthPos, endOfNumber - contentLengthPos);
+        std::string contentLengthStr = header.substr(contentLengthPos);
         size_t contentLength = std::stoi(contentLengthStr);
 
-        // Check if we have enough content
         expectedSize = separatorPos + separator.size() + contentLength;
         if (buffer.size() < expectedSize) {
-            return ""; // Not enough data yet
+            return ""; 
         }
 
-        // Extract the full message
         std::string token = buffer.substr(0, expectedSize);
-        buffer = buffer.substr(expectedSize); // Remove the processed part
-        expectedSize = 0; // Reset expected size
+        buffer = buffer.substr(expectedSize); 
+        expectedSize = 0; 
         return token;
     }
 };
 
 
 void handleMessage(void* state, std::string method, std::vector<uint8_t> contents) {
-    LOG_S(1) << "Recieved method: " << method << std::endl;
+    LOG_S(INFO) << "Recieved method: " << method << std::endl;
 }
 
 void startLsp(std::istream& in, std::ostream& out) { 
-    std::cout << "Starting tip lsp" << std::endl; 
+    LOG_S(INFO) << "Starting tip lsp" << std::endl; 
     std::string input; 
 
 
@@ -103,16 +86,30 @@ void startLsp(std::istream& in, std::ostream& out) {
 
     while (true) {
         try {
+            LOG_S(INFO) << "attempting to get token" << std::endl;
             std::string line = parser.getNextToken();
             std::vector<uint8_t> msg(line.begin(), line.end());
 
-            out << "Token: " << line << std::endl;
+            LOG_S(INFO) << "Token: " << line << std::endl;
             auto [method, contents] = DecodeMessage(msg);
 
             handleMessage(NULL, method, contents);
         } catch (const std::exception& e) {
             LOG_S(ERROR) << "LSP Error " << e.what() << std::endl;
+            break;
         }
     }
+}
+
+int main(int argc, char *argv[]) {
+    loguru::g_stderr_verbosity = 1;
+    loguru::g_preamble = true;
+    loguru::g_preamble_date = false;
+    loguru::g_preamble_time = false;
+    loguru::g_preamble_uptime = false;
+    loguru::g_preamble_thread = false;
+    loguru::add_file("/home/gburroughs/dev/tipc_test/log.txt", loguru::Truncate, loguru::Verbosity_INFO);
+    startLsp(std::cin, std::cout);
+    return 0;
 }
 

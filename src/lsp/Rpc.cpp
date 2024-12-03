@@ -24,10 +24,10 @@ std::string EncodeMessage(const json& msg) {
 
 
 struct BaseMessage {
-    std::string Method;
+    std::string method;
 
     // Deserialize JSON into BaseMessage
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(BaseMessage, Method)
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(BaseMessage, method)
 };
 
 std::pair<std::string, std::vector<uint8_t>> DecodeMessage(const std::vector<uint8_t>& msg) {
@@ -66,5 +66,5 @@ std::pair<std::string, std::vector<uint8_t>> DecodeMessage(const std::vector<uin
     }
 
     BaseMessage baseMessage = jsonContent.get<BaseMessage>();
-    return {baseMessage.Method, std::vector<uint8_t>(content.begin(), content.begin() + contentLength)};
+    return {baseMessage.method, std::vector<uint8_t>(content.begin(), content.begin() + contentLength)};
 }

@@ -14,3 +14,13 @@ TEST_CASE("Lsp: EncodeMessage", "[Lsp]") {
     std::string actual = EncodeMessage(input);
     REQUIRE(expected == actual);
 }
+
+TEST_CASE("Lsp: DecodeMessage", "[Lsp]") {
+    std::string input = "Content-Length: 15\r\n\r\n{\"Method\":\"hi\"}";
+    std::vector<uint8_t> vec(input.begin(), input.end());
+    auto output = DecodeMessage(vec);
+    std::string method = output.first;
+    std::vector<uint8_t> content = output.second;
+    REQUIRE(content.size() == 15);
+    REQUIRE(method == "hi");
+}

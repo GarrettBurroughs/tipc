@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
     }
   }
   if (lsp) {
-      startLsp();
+      startLsp(std::cin, std::cout);
       return 0;
   };
 

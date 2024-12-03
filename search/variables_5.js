@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['rhs_935',['rhs',['../classTypeConstraint.html#aef5020d732d8686f5741d5a39bf4bf98',1,'TypeConstraint']]]
+  ['name_939',['name',['../classTipAlpha.html#a2b31365594e4de12c4574b610feecd39',1,'TipAlpha']]],
+  ['node_940',['node',['../classTipVar.html#aaac111ac8d6de9917ead0f47da1024d1',1,'TipVar']]]
 ];

@@ -1,20 +1,8 @@
 var searchData=
 [
-  ['tipabsentfield_501',['TipAbsentField',['../classTipAbsentField.html',1,'']]],
-  ['tipalpha_502',['TipAlpha',['../classTipAlpha.html',1,'']]],
-  ['tipcons_503',['TipCons',['../classTipCons.html',1,'']]],
-  ['tipfunction_504',['TipFunction',['../classTipFunction.html',1,'']]],
-  ['tipint_505',['TipInt',['../classTipInt.html',1,'']]],
-  ['tipmu_506',['TipMu',['../classTipMu.html',1,'']]],
-  ['tiprecord_507',['TipRecord',['../classTipRecord.html',1,'']]],
-  ['tipref_508',['TipRef',['../classTipRef.html',1,'']]],
-  ['tiptype_509',['TipType',['../classTipType.html',1,'']]],
-  ['tiptypevisitor_510',['TipTypeVisitor',['../classTipTypeVisitor.html',1,'']]],
-  ['tipvar_511',['TipVar',['../classTipVar.html',1,'']]],
-  ['typeconstraint_512',['TypeConstraint',['../classTypeConstraint.html',1,'']]],
-  ['typeconstraintcollectvisitor_513',['TypeConstraintCollectVisitor',['../classTypeConstraintCollectVisitor.html',1,'']]],
-  ['typeconstraintunifyvisitor_514',['TypeConstraintUnifyVisitor',['../classTypeConstraintUnifyVisitor.html',1,'']]],
-  ['typeconstraintvisitor_515',['TypeConstraintVisitor',['../classTypeConstraintVisitor.html',1,'']]],
-  ['typeinference_516',['TypeInference',['../classTypeInference.html',1,'']]],
-  ['typevars_517',['TypeVars',['../classTypeVars.html',1,'']]]
+  ['semanticanalysis_500',['SemanticAnalysis',['../classSemanticAnalysis.html',1,'']]],
+  ['semanticerror_501',['SemanticError',['../classSemanticError.html',1,'']]],
+  ['substituter_502',['Substituter',['../classSubstituter.html',1,'']]],
+  ['symboltable_503',['SymbolTable',['../classSymbolTable.html',1,'']]],
+  ['syntaxtree_504',['SyntaxTree',['../classSyntaxTree.html',1,'']]]
 ];

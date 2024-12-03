@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['name_933',['name',['../classTipAlpha.html#a2b31365594e4de12c4574b610feecd39',1,'TipAlpha']]],
-  ['node_934',['node',['../classTipVar.html#aaac111ac8d6de9917ead0f47da1024d1',1,'TipVar']]]
+  ['method_938',['Method',['../structBaseMessage.html#a46ebcb27cd6a6c0c493bf35f5cbdeed2',1,'BaseMessage']]]
 ];

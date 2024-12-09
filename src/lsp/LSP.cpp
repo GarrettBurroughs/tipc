@@ -1,5 +1,6 @@
 #include "LSP.h"
 #include "RPC.h"
+#include "messages/InitializeRequest.h"
 #include <exception>
 #include <iostream>
 #include <ostream>
@@ -7,6 +8,22 @@
 #include <vector>
 
 #include "loguru.hpp"
+
+void handleMessage(void* state, std::string method, std::vector<uint8_t> contents) {
+    LOG_S(INFO) << "Recieved method: " << method << std::endl;
+
+    nlohmann::json jsonContent;
+    try {
+        jsonContent = nlohmann::json::parse(contents.begin(), contents.end());
+    } catch (const std::exception& e) {
+        throw std::invalid_argument(std::string("Failed to parse JSON: ") + e.what());
+    }
+
+    if (method == "initialize") {
+        InitializeRequest request = jsonContent.get<InitializeRequest>();
+        LOG_S(INFO) << "Connected to: " << request.params.clientInfo->name << " " << request.params.clientInfo->version << std::endl;
+    }
+}
 
 class StreamParser {
 public:
@@ -72,11 +89,6 @@ private:
     }
 };
 
-
-void handleMessage(void* state, std::string method, std::vector<uint8_t> contents) {
-    LOG_S(INFO) << "Recieved method: " << method << std::endl;
-}
-
 void startLsp(std::istream& in, std::ostream& out) { 
     LOG_S(INFO) << "Starting tip lsp" << std::endl; 
     std::string input; 
@@ -108,6 +120,8 @@ int main(int argc, char *argv[]) {
     loguru::g_preamble_time = false;
     loguru::g_preamble_uptime = false;
     loguru::g_preamble_thread = false;
+
+    // TODO: Remove this log file when finished (or add option for enabling loggin)
     loguru::add_file("/home/gburroughs/dev/tipc_test/log.txt", loguru::Truncate, loguru::Verbosity_INFO);
     startLsp(std::cin, std::cout);
     return 0;

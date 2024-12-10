@@ -40,4 +40,9 @@ struct TextDocumentPositionParams {
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(TextDocumentPositionParams, textDocument, position)
 };
 
+struct Range {
+    Position start;
+    Position end;
 
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Range, start, end)
+};

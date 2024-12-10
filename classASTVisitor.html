@@ -79,20 +79,21 @@ Inheritance diagram for ASTVisitor:</div>
 <div class="dyncontent">
 <div class="center"><img src="classASTVisitor__inherit__graph.png" border="0" usemap="#aASTVisitor_inherit__map" alt="Inheritance graph"/></div>
 <map name="aASTVisitor_inherit__map" id="aASTVisitor_inherit__map">
-<area shape="rect" title="Base class for AST visitors." alt="" coords="5,208,95,235"/>
+<area shape="rect" title="Base class for AST visitors." alt="" coords="5,233,95,260"/>
 <area shape="rect" href="classAbsentFieldChecker.html" title="Visits AST and checks that all field accesses are to defined fields." alt="" coords="155,5,305,32"/>
 <area shape="rect" href="classCFAnalyzer.html" title="Performs control flow analyses with the help of AST and Symbol table of a program Provides helper fun..." alt="" coords="183,56,277,83"/>
 <area shape="rect" href="classCallGraphBuilder.html" title="Builds call graph of a program that represents calling relationships between subroutines This class o..." alt="" coords="164,107,296,133"/>
 <area shape="rect" href="classCheckAssignable.html" title="Check if left hand side of assignment is an l&#45;value." alt="" coords="163,157,297,184"/>
 <area shape="rect" href="classFieldNameCollector.html" title="Collects all field names referenced within the program." alt="" coords="155,208,305,235"/>
 <area shape="rect" href="classFunctionNameCollector.html" title="Collects the names of functions declared in the program." alt="" coords="143,259,317,285"/>
-<area shape="rect" href="classLocalNameCollector.html" title="Records local names declared in each function and checks for errors." alt="" coords="153,309,307,336"/>
-<area shape="rect" href="classPrettyPrinter.html" title="GNU Style PrettyPrinter." alt="" coords="178,360,282,387"/>
-<area shape="rect" href="classTypeConstraintVisitor.html" title="Visitor generates type constraints and processes them." alt="" coords="149,411,311,437"/>
-<area shape="rect" href="classPolyTypeConstraintVisitor.html" title="Visitor generates polymorphic type constraints and collects them. This visitor is called for a functi..." alt="" coords="374,360,563,387"/>
-<area shape="rect" href="classTypeConstraintCollectVisitor.html" title="Visitor generates type constraints and collects them." alt="" coords="365,411,572,437"/>
-<area shape="rect" href="classTypeConstraintUnifyVisitor.html" title="Visitor generates type constraints and unifies them on&#45;the&#45;fly." alt="" coords="371,461,566,488"/>
-<area shape="rect" href="classPolyTypeConstraintCollectVisitor.html" title="Visitor generates type constraints and collects them." alt="" coords="620,353,812,394"/>
+<area shape="rect" href="classGetVariableNode.html" title=" " alt="" coords="164,309,296,336"/>
+<area shape="rect" href="classLocalNameCollector.html" title="Records local names declared in each function and checks for errors." alt="" coords="153,360,307,387"/>
+<area shape="rect" href="classPrettyPrinter.html" title="GNU Style PrettyPrinter." alt="" coords="178,411,282,437"/>
+<area shape="rect" href="classTypeConstraintVisitor.html" title="Visitor generates type constraints and processes them." alt="" coords="149,461,311,488"/>
+<area shape="rect" href="classPolyTypeConstraintVisitor.html" title="Visitor generates polymorphic type constraints and collects them. This visitor is called for a functi..." alt="" coords="374,411,563,437"/>
+<area shape="rect" href="classTypeConstraintCollectVisitor.html" title="Visitor generates type constraints and collects them." alt="" coords="365,461,572,488"/>
+<area shape="rect" href="classTypeConstraintUnifyVisitor.html" title="Visitor generates type constraints and unifies them on&#45;the&#45;fly." alt="" coords="371,512,566,539"/>
+<area shape="rect" href="classPolyTypeConstraintCollectVisitor.html" title="Visitor generates type constraints and collects them." alt="" coords="620,403,812,445"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -999,6 +1000,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Reimplemented in <a class="el" href="classGetVariableNode.html#a9dcef02a0c738db55cadd19c4c5f4cfc">GetVariableNode</a>.</p>
+
 </div>
 </div>
 <a id="aaeb97c12c695bd3a977d0c41703403fa"></a>
@@ -1157,7 +1160,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reimplemented in <a class="el" href="classTypeConstraintVisitor.html#ac94229baaaaa698bba7f3960c448cab6">TypeConstraintVisitor</a>, <a class="el" href="classLocalNameCollector.html#a22ba224ebeac144cd510c40701df43f5">LocalNameCollector</a>, <a class="el" href="classFunctionNameCollector.html#a57ea914b52cf8a6712f9e886272dd737">FunctionNameCollector</a>, <a class="el" href="classCFAnalyzer.html#a7bbbb453f2cc1f43c9e231a26a5b3c40">CFAnalyzer</a>, <a class="el" href="classCallGraphBuilder.html#ac2b22ecc4a0ac8a16efeafe60b00605b">CallGraphBuilder</a>, and <a class="el" href="classPrettyPrinter.html#a19ae4cd6c8c0615c528bd019fa2ae90f">PrettyPrinter</a>.</p>
+<p>Reimplemented in <a class="el" href="classTypeConstraintVisitor.html#ac94229baaaaa698bba7f3960c448cab6">TypeConstraintVisitor</a>, <a class="el" href="classLocalNameCollector.html#a22ba224ebeac144cd510c40701df43f5">LocalNameCollector</a>, <a class="el" href="classFunctionNameCollector.html#a57ea914b52cf8a6712f9e886272dd737">FunctionNameCollector</a>, <a class="el" href="classCFAnalyzer.html#a7bbbb453f2cc1f43c9e231a26a5b3c40">CFAnalyzer</a>, <a class="el" href="classCallGraphBuilder.html#ac2b22ecc4a0ac8a16efeafe60b00605b">CallGraphBuilder</a>, <a class="el" href="classGetVariableNode.html#a4ac2e2e13c61404b17a1c07be8be42b2">GetVariableNode</a>, and <a class="el" href="classPrettyPrinter.html#a19ae4cd6c8c0615c528bd019fa2ae90f">PrettyPrinter</a>.</p>
 
 </div>
 </div>
@@ -1420,6 +1423,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classGetVariableNode.html#a3d98a1551a869b6758390c466801e11b">GetVariableNode</a>.</p>
 
 </div>
 </div>

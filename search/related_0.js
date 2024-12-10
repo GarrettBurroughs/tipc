@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_3c_3c_957',['operator&lt;&lt;',['../classASTNode.html#a154e9d7d440f6ccdc76da2ad0b549455',1,'ASTNode::operator&lt;&lt;()'],['../classASTProgram.html#a87ec7055f43e14f9c00dbdae7521deba',1,'ASTProgram::operator&lt;&lt;()'],['../classTipType.html#af0166719b6018a74f219e790667a51c4',1,'TipType::operator&lt;&lt;()'],['../classTypeConstraint.html#ab7fdfce6de4e8250a5ee2d506703567e',1,'TypeConstraint::operator&lt;&lt;()'],['../classUnionFind.html#aa2fab714dec35eefda3875fe11c189a8',1,'UnionFind::operator&lt;&lt;()']]]
+  ['from_5fjson_1083',['from_json',['../structHoverResponse.html#ac1ea6e9cfb150598bf55d3129a874a2d',1,'HoverResponse::from_json()'],['../structInitializeRequestParams.html#a34c9101f10c057b2d8e3acfecd9b98c4',1,'InitializeRequestParams::from_json()'],['../structInitializeResponse.html#a84417113dfdc7cdb8c721a0c64d7cf5b',1,'InitializeResponse::from_json()']]]
 ];

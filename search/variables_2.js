@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fmap_945',['fMap',['../classFunctionNameCollector.html#ada5f5f7a7a6ba10996ff2f200175ee3a',1,'FunctionNameCollector']]]
+  ['definitionprovider_1056',['definitionProvider',['../structServerCapabilities.html#ac54f1ce94781b13e25c3af5956edd6f6',1,'ServerCapabilities']]]
 ];

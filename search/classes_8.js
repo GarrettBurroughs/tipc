@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['parseerror_499',['ParseError',['../classParseError.html',1,'']]],
-  ['parsererrorlistener_500',['ParserErrorListener',['../classParserErrorListener.html',1,'']]],
-  ['polytypeconstraintcollectvisitor_501',['PolyTypeConstraintCollectVisitor',['../classPolyTypeConstraintCollectVisitor.html',1,'']]],
-  ['polytypeconstraintvisitor_502',['PolyTypeConstraintVisitor',['../classPolyTypeConstraintVisitor.html',1,'']]],
-  ['preorderiterator_503',['PreOrderIterator',['../classPreOrderIterator.html',1,'']]],
-  ['prettyprinter_504',['PrettyPrinter',['../classPrettyPrinter.html',1,'']]]
+  ['initializerequest_566',['InitializeRequest',['../structInitializeRequest.html',1,'']]],
+  ['initializerequestparams_567',['InitializeRequestParams',['../structInitializeRequestParams.html',1,'']]],
+  ['initializeresponse_568',['InitializeResponse',['../structInitializeResponse.html',1,'']]],
+  ['initializeresult_569',['InitializeResult',['../structInitializeResult.html',1,'']]],
+  ['internalerror_570',['InternalError',['../classInternalError.html',1,'']]],
+  ['iterator_571',['Iterator',['../classIterator.html',1,'']]],
+  ['iteratorimpl_572',['IteratorImpl',['../classIteratorImpl.html',1,'']]]
 ];

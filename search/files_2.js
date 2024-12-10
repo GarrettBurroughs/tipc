@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['error_2ecpp_611',['Error.cpp',['../Error_8cpp.html',1,'']]],
-  ['error_2eh_612',['Error.h',['../Error_8h.html',1,'']]]
+  ['didchangetextdocumentnotification_2eh_697',['DidChangeTextDocumentNotification.h',['../DidChangeTextDocumentNotification_8h.html',1,'']]],
+  ['didopentextdocumentnotification_2eh_698',['DidOpenTextDocumentNotification.h',['../DidOpenTextDocumentNotification_8h.html',1,'']]]
 ];

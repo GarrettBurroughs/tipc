@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['name_270',['name',['../classTipAlpha.html#a2b31365594e4de12c4574b610feecd39',1,'TipAlpha']]],
-  ['node_271',['node',['../classTipVar.html#aaac111ac8d6de9917ead0f47da1024d1',1,'TipVar']]]
+  ['name_310',['name',['../structClientInfo.html#ad22832677acf7ac7e04b0a613ca5ba24',1,'ClientInfo::name()'],['../structServerInfo.html#ac1b6c30ed482012324aee9a240007158',1,'ServerInfo::name()'],['../classTipAlpha.html#a2b31365594e4de12c4574b610feecd39',1,'TipAlpha::name()']]],
+  ['newhoverresponse_311',['newHoverResponse',['../messages_8cpp.html#af63783e0b2ab1cadf039e14537c5fecf',1,'newHoverResponse(int id, std::string contents):&#160;messages.cpp'],['../messages_8h.html#af63783e0b2ab1cadf039e14537c5fecf',1,'newHoverResponse(int id, std::string contents):&#160;messages.cpp']]],
+  ['newinitializeresponse_312',['newInitializeResponse',['../messages_8cpp.html#ac350026ba09b77b2d0f75267f87a2915',1,'newInitializeResponse(int id):&#160;messages.cpp'],['../messages_8h.html#ac350026ba09b77b2d0f75267f87a2915',1,'newInitializeResponse(int id):&#160;messages.cpp']]],
+  ['nlohmann_5fdefine_5ftype_5fintrusive_313',['NLOHMANN_DEFINE_TYPE_INTRUSIVE',['../structTextDocumentContentChangeEvent.html#a7bf2c269cc3fc7e8863f5ed3a9d56991',1,'TextDocumentContentChangeEvent::NLOHMANN_DEFINE_TYPE_INTRUSIVE()'],['../structDidChangeTextDocumentParams.html#a02c01432a326e6c3005cebc411707b55',1,'DidChangeTextDocumentParams::NLOHMANN_DEFINE_TYPE_INTRUSIVE()'],['../structDidChangeTextDocumentNotification.html#a1e8a60cfbdcbc907afe449dc39e8c04c',1,'DidChangeTextDocumentNotification::NLOHMANN_DEFINE_TYPE_INTRUSIVE()'],['../structDidOpenTextDocucumentParams.html#abc2b5c149c3cf0237c5b89e469ceec9c',1,'DidOpenTextDocucumentParams::NLOHMANN_DEFINE_TYPE_INTRUSIVE()'],['../structDidOpenTextDocumentNotification.html#aed2b2dc382d5e482b4faeb368735a964',1,'DidOpenTextDocumentNotification::NLOHMANN_DEFINE_TYPE_INTRUSIVE()']]],
+  ['node_314',['node',['../classTipVar.html#aaac111ac8d6de9917ead0f47da1024d1',1,'TipVar']]]
 ];

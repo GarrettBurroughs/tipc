@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['method_948',['method',['../structBaseMessage.html#a323ad7aa98e201d2081853df2167a719',1,'BaseMessage']]]
+  ['hoverprovider_1058',['hoverProvider',['../structServerCapabilities.html#a7ba109c1feb935b5969a2b81163e8873',1,'ServerCapabilities']]]
 ];

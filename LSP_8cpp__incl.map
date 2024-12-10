@@ -1,52 +1,52 @@
 <map id="/home/runner/work/tipc/tipc/src/lsp/LSP.cpp" name="/home/runner/work/tipc/tipc/src/lsp/LSP.cpp">
-<area shape="rect" id="node1" title=" " alt="" coords="1789,5,1963,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="139,95,226,121"/>
-<area shape="rect" id="node3" title=" " alt="" coords="1493,543,1573,569"/>
-<area shape="rect" id="node4" title=" " alt="" coords="301,95,376,121"/>
-<area shape="rect" id="node5" title=" " alt="" coords="2269,1065,2328,1092"/>
-<area shape="rect" id="node6" title=" " alt="" coords="1579,1065,1642,1092"/>
-<area shape="rect" id="node7" title=" " alt="" coords="2855,692,3001,719"/>
-<area shape="rect" id="node8" href="$ASTDeclNode_8h.html" title=" " alt="" coords="693,916,816,943"/>
-<area shape="rect" id="node15" title=" " alt="" coords="1831,95,1921,121"/>
-<area shape="rect" id="node16" href="$ASTProgram_8h.html" title=" " alt="" coords="399,692,513,719"/>
-<area shape="rect" id="node20" href="$FrontEnd_8h.html" title=" " alt="" coords="237,468,328,495"/>
-<area shape="rect" id="node23" href="$SemanticAnalysis_8h.html" title=" " alt="" coords="1177,95,1327,121"/>
-<area shape="rect" id="node42" href="$RPC_8h.html" title=" " alt="" coords="2269,617,2329,644"/>
-<area shape="rect" id="node43" href="$LSPState_8h.html" title=" " alt="" coords="2003,468,2093,495"/>
-<area shape="rect" id="node44" href="$HoverRequest_8h.html" title=" " alt="" coords="2753,543,2949,569"/>
-<area shape="rect" id="node47" href="$messages_8h.html" title=" " alt="" coords="2420,468,2591,495"/>
-<area shape="rect" id="node9" href="$ASTNode_8h.html" title=" " alt="" coords="808,991,901,1017"/>
-<area shape="rect" id="node10" title=" " alt="" coords="939,1065,1077,1092"/>
-<area shape="rect" id="node11" title=" " alt="" coords="638,1065,770,1092"/>
-<area shape="rect" id="node12" title=" " alt="" coords="795,1065,915,1092"/>
-<area shape="rect" id="node13" title=" " alt="" coords="1825,1065,1903,1092"/>
-<area shape="rect" id="node14" title=" " alt="" coords="265,1065,341,1092"/>
-<area shape="rect" id="node17" href="$ASTFunction_8h.html" title=" " alt="" coords="791,767,905,793"/>
-<area shape="rect" id="node18" href="$ASTDeclStmt_8h.html" title=" " alt="" coords="943,841,1062,868"/>
-<area shape="rect" id="node19" href="$ASTStmt_8h.html" title=" " alt="" coords="957,916,1048,943"/>
-<area shape="rect" id="node21" title=" " alt="" coords="93,543,221,569"/>
-<area shape="rect" id="node22" title=" " alt="" coords="246,543,319,569"/>
-<area shape="rect" id="node24" href="$SymbolTable_8h.html" title=" " alt="" coords="1131,468,1248,495"/>
-<area shape="rect" id="node32" href="$TypeInference_8h.html" title=" " alt="" coords="1189,169,1315,196"/>
-<area shape="rect" id="node33" href="$CallGraph_8h.html" title=" " alt="" coords="965,244,1064,271"/>
-<area shape="rect" id="node25" href="$ASTVisitor_8h.html" title=" " alt="" coords="955,543,1055,569"/>
-<area shape="rect" id="node31" title=" " alt="" coords="1259,543,1309,569"/>
-<area shape="rect" id="node26" href="$AST_8h.html" title=" " alt="" coords="928,617,987,644"/>
-<area shape="rect" id="node27" href="$ASTAccessExpr_8h.html" title=" " alt="" coords="892,692,1023,719"/>
-<area shape="rect" id="node28" href="$ASTAllocExpr_8h.html" title=" " alt="" coords="1047,692,1166,719"/>
-<area shape="rect" id="node29" href="$ASTAssignStmt_8h.html" title=" " alt="" coords="1314,767,1446,793"/>
-<area shape="rect" id="node30" href="$ASTBinaryExpr_8h.html" title=" " alt="" coords="1190,692,1319,719"/>
-<area shape="rect" id="node37" href="$Unifier_8h.html" title=" " alt="" coords="1489,393,1565,420"/>
-<area shape="rect" id="node34" href="$CallGraphBuilder_8h.html" title=" " alt="" coords="943,319,1086,345"/>
-<area shape="rect" id="node36" title=" " alt="" coords="861,468,904,495"/>
-<area shape="rect" id="node35" href="$CFAnalyzer_8h.html" title=" " alt="" coords="1003,393,1109,420"/>
-<area shape="rect" id="node38" href="$TipType_8h.html" title=" " alt="" coords="1334,543,1418,569"/>
-<area shape="rect" id="node39" href="$TipVar_8h.html" title=" " alt="" coords="1651,468,1725,495"/>
-<area shape="rect" id="node40" href="$TypeConstraint_8h.html" title=" " alt="" coords="1272,468,1403,495"/>
-<area shape="rect" id="node41" href="$UnionFind_8h.html" title=" " alt="" coords="1477,468,1576,495"/>
-<area shape="rect" id="node45" href="$TextDocument_8h.html" title=" " alt="" coords="2472,617,2600,644"/>
-<area shape="rect" id="node46" title=" " alt="" coords="2815,617,2889,644"/>
-<area shape="rect" id="node48" href="$InitializeRequest_8h.html" title=" " alt="" coords="2973,543,3115,569"/>
-<area shape="rect" id="node49" href="$DidOpenTextDocumentNotification_8h.html" title=" " alt="" coords="2469,543,2728,569"/>
-<area shape="rect" id="node50" href="$DidChangeTextDocumentNotification_8h.html" title=" " alt="" coords="2120,543,2395,569"/>
+<area shape="rect" id="node1" title=" " alt="" coords="1301,5,1475,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="83,95,170,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="800,543,880,569"/>
+<area shape="rect" id="node4" title=" " alt="" coords="245,95,320,121"/>
+<area shape="rect" id="node5" title=" " alt="" coords="2212,1065,2271,1092"/>
+<area shape="rect" id="node6" title=" " alt="" coords="1726,1065,1789,1092"/>
+<area shape="rect" id="node7" title=" " alt="" coords="2421,692,2568,719"/>
+<area shape="rect" id="node8" href="$ASTDeclNode_8h.html" title=" " alt="" coords="855,916,977,943"/>
+<area shape="rect" id="node15" title=" " alt="" coords="1343,95,1433,121"/>
+<area shape="rect" id="node16" href="$ASTProgram_8h.html" title=" " alt="" coords="452,692,567,719"/>
+<area shape="rect" id="node20" href="$FrontEnd_8h.html" title=" " alt="" coords="187,468,277,495"/>
+<area shape="rect" id="node23" href="$SemanticAnalysis_8h.html" title=" " alt="" coords="586,95,737,121"/>
+<area shape="rect" id="node41" href="$RPC_8h.html" title=" " alt="" coords="2211,617,2271,644"/>
+<area shape="rect" id="node42" href="$LSPState_8h.html" title=" " alt="" coords="1992,468,2083,495"/>
+<area shape="rect" id="node43" href="$HoverRequest_8h.html" title=" " alt="" coords="2089,543,2285,569"/>
+<area shape="rect" id="node46" href="$messages_8h.html" title=" " alt="" coords="2528,468,2699,495"/>
+<area shape="rect" id="node9" href="$ASTNode_8h.html" title=" " alt="" coords="969,991,1063,1017"/>
+<area shape="rect" id="node10" title=" " alt="" coords="1100,1065,1239,1092"/>
+<area shape="rect" id="node11" title=" " alt="" coords="799,1065,931,1092"/>
+<area shape="rect" id="node12" title=" " alt="" coords="956,1065,1076,1092"/>
+<area shape="rect" id="node13" title=" " alt="" coords="471,1065,548,1092"/>
+<area shape="rect" id="node14" title=" " alt="" coords="661,1065,737,1092"/>
+<area shape="rect" id="node17" href="$ASTFunction_8h.html" title=" " alt="" coords="952,767,1067,793"/>
+<area shape="rect" id="node18" href="$ASTDeclStmt_8h.html" title=" " alt="" coords="1054,841,1173,868"/>
+<area shape="rect" id="node19" href="$ASTStmt_8h.html" title=" " alt="" coords="1165,916,1256,943"/>
+<area shape="rect" id="node21" title=" " alt="" coords="43,543,171,569"/>
+<area shape="rect" id="node22" title=" " alt="" coords="195,543,269,569"/>
+<area shape="rect" id="node24" href="$SymbolTable_8h.html" title=" " alt="" coords="1648,468,1765,495"/>
+<area shape="rect" id="node31" href="$TypeInference_8h.html" title=" " alt="" coords="599,169,724,196"/>
+<area shape="rect" id="node32" href="$CallGraph_8h.html" title=" " alt="" coords="1279,244,1377,271"/>
+<area shape="rect" id="node25" href="$ASTVisitor_8h.html" title=" " alt="" coords="1619,543,1719,569"/>
+<area shape="rect" id="node30" title=" " alt="" coords="1795,543,1845,569"/>
+<area shape="rect" id="node26" href="$AST_8h.html" title=" " alt="" coords="1151,617,1209,644"/>
+<area shape="rect" id="node27" href="$ASTAccessExpr_8h.html" title=" " alt="" coords="1293,692,1424,719"/>
+<area shape="rect" id="node28" href="$ASTAllocExpr_8h.html" title=" " alt="" coords="1449,692,1567,719"/>
+<area shape="rect" id="node29" href="$ASTAssignStmt_8h.html" title=" " alt="" coords="1142,767,1274,793"/>
+<area shape="rect" id="node36" href="$Unifier_8h.html" title=" " alt="" coords="1079,393,1155,420"/>
+<area shape="rect" id="node33" href="$CallGraphBuilder_8h.html" title=" " alt="" coords="1366,319,1509,345"/>
+<area shape="rect" id="node35" title=" " alt="" coords="1379,468,1421,495"/>
+<area shape="rect" id="node34" href="$CFAnalyzer_8h.html" title=" " alt="" coords="1467,393,1573,420"/>
+<area shape="rect" id="node37" href="$TipType_8h.html" title=" " alt="" coords="1006,543,1090,569"/>
+<area shape="rect" id="node38" href="$TipVar_8h.html" title=" " alt="" coords="851,468,925,495"/>
+<area shape="rect" id="node39" href="$TypeConstraint_8h.html" title=" " alt="" coords="949,468,1080,495"/>
+<area shape="rect" id="node40" href="$UnionFind_8h.html" title=" " alt="" coords="1155,468,1253,495"/>
+<area shape="rect" id="node44" href="$TextDocument_8h.html" title=" " alt="" coords="2549,617,2677,644"/>
+<area shape="rect" id="node45" title=" " alt="" coords="2037,617,2112,644"/>
+<area shape="rect" id="node47" href="$InitializeRequest_8h.html" title=" " alt="" coords="2309,543,2451,569"/>
+<area shape="rect" id="node48" href="$DidOpenTextDocumentNotification_8h.html" title=" " alt="" coords="2775,543,3033,569"/>
+<area shape="rect" id="node49" href="$PublishDiagnosticsNotification_8h.html" title=" " alt="" coords="3057,543,3289,569"/>
+<area shape="rect" id="node50" href="$DidChangeTextDocumentNotification_8h.html" title=" " alt="" coords="2476,543,2751,569"/>
 </map>

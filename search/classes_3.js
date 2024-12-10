@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['didchangetextdocumentnotification_552',['DidChangeTextDocumentNotification',['../structDidChangeTextDocumentNotification.html',1,'']]],
-  ['didchangetextdocumentparams_553',['DidChangeTextDocumentParams',['../structDidChangeTextDocumentParams.html',1,'']]],
-  ['didopentextdocucumentparams_554',['DidOpenTextDocucumentParams',['../structDidOpenTextDocucumentParams.html',1,'']]],
-  ['didopentextdocumentnotification_555',['DidOpenTextDocumentNotification',['../structDidOpenTextDocumentNotification.html',1,'']]]
+  ['diagnostic_564',['Diagnostic',['../structDiagnostic.html',1,'']]],
+  ['didchangetextdocumentnotification_565',['DidChangeTextDocumentNotification',['../structDidChangeTextDocumentNotification.html',1,'']]],
+  ['didchangetextdocumentparams_566',['DidChangeTextDocumentParams',['../structDidChangeTextDocumentParams.html',1,'']]],
+  ['didopentextdocucumentparams_567',['DidOpenTextDocucumentParams',['../structDidOpenTextDocucumentParams.html',1,'']]],
+  ['didopentextdocumentnotification_568',['DidOpenTextDocumentNotification',['../structDidOpenTextDocumentNotification.html',1,'']]]
 ];

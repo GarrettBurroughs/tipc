@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['result_1070',['result',['../structHoverResponse.html#aaf94ec092189633c0726e631cd2a1530',1,'HoverResponse::result()'],['../structInitializeResponse.html#a514dfe43ceec26ce4f84d158c1ccc780',1,'InitializeResponse::result()']]],
-  ['rhs_1071',['rhs',['../classTypeConstraint.html#aef5020d732d8686f5741d5a39bf4bf98',1,'TypeConstraint']]]
+  ['params_1090',['params',['../structDidChangeTextDocumentNotification.html#ac6327515f4a4543b4022ea64321a09e3',1,'DidChangeTextDocumentNotification::params()'],['../structDidOpenTextDocumentNotification.html#aba78d22c11f43031de7f6c7a51fcf575',1,'DidOpenTextDocumentNotification::params()'],['../structHoverRequest.html#ac3788a628567005d3931307c583026bb',1,'HoverRequest::params()'],['../structInitializeRequest.html#a40cf81c7075a9ce35f558ebadde7f8ad',1,'InitializeRequest::params()'],['../structPublishDiagnosticsNotification.html#a1203c88a53cccd5c6646159657452ca8',1,'PublishDiagnosticsNotification::params()']]],
+  ['position_1091',['position',['../structHoverParams.html#abe820134b8fc4934a9984f9486c9a3e8',1,'HoverParams::position()'],['../structTextDocumentPositionParams.html#a7db5d54168c86a677926dd693904235f',1,'TextDocumentPositionParams::position()']]]
 ];

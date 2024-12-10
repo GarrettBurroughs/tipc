@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jsonrpc_1060',['jsonrpc',['../structDidChangeTextDocumentNotification.html#a35367d773a8463a48f6d6bcaca55e528',1,'DidChangeTextDocumentNotification::jsonrpc()'],['../structDidOpenTextDocumentNotification.html#a741d959f9102b183d4ec89971c9c7f14',1,'DidOpenTextDocumentNotification::jsonrpc()'],['../structHoverRequest.html#a323d3d1fd7e2de823717733f128b0ad2',1,'HoverRequest::jsonrpc()'],['../structHoverResponse.html#a42fc578637be4c07977e1a4cfd814d2d',1,'HoverResponse::jsonrpc()'],['../structInitializeRequest.html#a944e0a553d12b1fe93d4702a3511b95d',1,'InitializeRequest::jsonrpc()'],['../structInitializeResponse.html#ae87486be8061b0a0fa4607196beebe09',1,'InitializeResponse::jsonrpc()']]]
+  ['id_1080',['id',['../structHoverRequest.html#a58075cf132f0af82071c7198873e8cb0',1,'HoverRequest::id()'],['../structHoverResponse.html#a44c981d557cf33bf43c5ce56b682bfb7',1,'HoverResponse::id()'],['../structInitializeRequest.html#aa84f82e8eca9ebefde1627832f1fd56b',1,'InitializeRequest::id()'],['../structInitializeResponse.html#a29438be56637befaa1132a8540d054aa',1,'InitializeResponse::id()']]]
 ];

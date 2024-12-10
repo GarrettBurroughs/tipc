@@ -73,22 +73,25 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="messages_8h_source.html">messages.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="PublishDiagnosticsNotification_8h_source.html">PublishDiagnosticsNotification.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="TextDocument_8h_source.html">TextDocument.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for messages.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="messages_8cpp__incl.png" border="0" usemap="#a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2messages_2messages_8cpp" alt=""/></div>
 <map name="a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2messages_2messages_8cpp" id="a_2home_2runner_2work_2tipc_2tipc_2src_2lsp_2messages_2messages_8cpp">
-<area shape="rect" title=" " alt="" coords="250,5,423,61"/>
-<area shape="rect" href="messages_8h.html" title=" " alt="" coords="287,109,387,136"/>
+<area shape="rect" title=" " alt="" coords="985,5,1158,61"/>
+<area shape="rect" href="messages_8h.html" title=" " alt="" coords="585,109,685,136"/>
+<area shape="rect" href="TextDocument_8h.html" title=" " alt="" coords="543,259,671,285"/>
+<area shape="rect" href="PublishDiagnosticsNotification_8h.html" title=" " alt="" coords="955,184,1187,211"/>
 <area shape="rect" href="InitializeRequest_8h.html" title=" " alt="" coords="5,184,148,211"/>
-<area shape="rect" href="DidOpenTextDocumentNotification_8h.html" title=" " alt="" coords="374,184,633,211"/>
-<area shape="rect" href="TextDocument_8h.html" title=" " alt="" coords="269,259,397,285"/>
+<area shape="rect" href="DidOpenTextDocumentNotification_8h.html" title=" " alt="" coords="673,184,931,211"/>
 <area shape="rect" href="HoverRequest_8h.html" title=" " alt="" coords="172,184,299,211"/>
-<area shape="rect" href="DidChangeTextDocumentNotification_8h.html" title=" " alt="" coords="657,184,931,211"/>
-<area shape="rect" title=" " alt="" coords="170,259,245,285"/>
-<area shape="rect" title=" " alt="" coords="113,333,171,360"/>
-<area shape="rect" title=" " alt="" coords="227,333,374,360"/>
-<area shape="rect" title=" " alt="" coords="763,259,825,285"/>
+<area shape="rect" href="DidChangeTextDocumentNotification_8h.html" title=" " alt="" coords="323,184,598,211"/>
+<area shape="rect" title=" " alt="" coords="182,259,257,285"/>
+<area shape="rect" title=" " alt="" coords="251,333,310,360"/>
+<area shape="rect" title=" " alt="" coords="434,333,581,360"/>
+<area shape="rect" title=" " alt="" coords="429,259,492,285"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -98,6 +101,10 @@ Functions</h2></td></tr>
 <tr class="separator:ac350026ba09b77b2d0f75267f87a2915"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af63783e0b2ab1cadf039e14537c5fecf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structHoverResponse.html">HoverResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="messages_8cpp.html#af63783e0b2ab1cadf039e14537c5fecf">newHoverResponse</a> (int id, std::string contents)</td></tr>
 <tr class="separator:af63783e0b2ab1cadf039e14537c5fecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f5e35a9dd373c26e213ceaee8cd1e19"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPublishDiagnosticsNotification.html">PublishDiagnosticsNotification</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="messages_8cpp.html#a1f5e35a9dd373c26e213ceaee8cd1e19">newPublishDiagnosticsNotificationError</a> (<a class="el" href="structVersionedTextDocumentIdentfier.html">VersionedTextDocumentIdentfier</a> textDocument, std::string error)</td></tr>
+<tr class="separator:a1f5e35a9dd373c26e213ceaee8cd1e19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41cab6699f1d135f3ec450539dbd020f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structPublishDiagnosticsNotification.html">PublishDiagnosticsNotification</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="messages_8cpp.html#a41cab6699f1d135f3ec450539dbd020f">newPublishDiagnosticsNotificationEmpty</a> (<a class="el" href="structVersionedTextDocumentIdentfier.html">VersionedTextDocumentIdentfier</a> textDocument)</td></tr>
+<tr class="separator:a41cab6699f1d135f3ec450539dbd020f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="af63783e0b2ab1cadf039e14537c5fecf"></a>
@@ -140,6 +147,52 @@ Functions</h2></td></tr>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a41cab6699f1d135f3ec450539dbd020f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41cab6699f1d135f3ec450539dbd020f">&#9670;&nbsp;</a></span>newPublishDiagnosticsNotificationEmpty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPublishDiagnosticsNotification.html">PublishDiagnosticsNotification</a> newPublishDiagnosticsNotificationEmpty </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structVersionedTextDocumentIdentfier.html">VersionedTextDocumentIdentfier</a>&#160;</td>
+          <td class="paramname"><em>textDocument</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1f5e35a9dd373c26e213ceaee8cd1e19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f5e35a9dd373c26e213ceaee8cd1e19">&#9670;&nbsp;</a></span>newPublishDiagnosticsNotificationError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structPublishDiagnosticsNotification.html">PublishDiagnosticsNotification</a> newPublishDiagnosticsNotificationError </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structVersionedTextDocumentIdentfier.html">VersionedTextDocumentIdentfier</a>&#160;</td>
+          <td class="paramname"><em>textDocument</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>error</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['version_1080',['version',['../structClientInfo.html#ad4a5b25ac72a9f4febd775ed76659639',1,'ClientInfo::version()'],['../structServerInfo.html#ab9e11fd6d523bb103ed7c57c2bcb8ec2',1,'ServerInfo::version()'],['../structTextDocumentItem.html#a386cd96dd3bd6aeec1e6587c81583874',1,'TextDocumentItem::version()'],['../structVersionedTextDocumentIdentfier.html#a32345fefd17ce8c15c3510cfe50f9ba0',1,'VersionedTextDocumentIdentfier::version()']]],
-  ['visitedtypes_1081',['visitedTypes',['../classSubstituter.html#aef48964e562c82df137be79343addacf',1,'Substituter']]]
+  ['uri_1104',['uri',['../structPublishDiagnosticsParams.html#aaad87b90fc43990cf06f8f0e4126152a',1,'PublishDiagnosticsParams::uri()'],['../structTextDocumentItem.html#af87eb27f778d2a7e32e3c306e571a160',1,'TextDocumentItem::uri()'],['../structTextDocumentIdentfier.html#a5dceee4eb4b52bcfc5b82367f0874b6f',1,'TextDocumentIdentfier::uri()'],['../structVersionedTextDocumentIdentfier.html#a704f8422ea4a5e59bd973d311fb0119a',1,'VersionedTextDocumentIdentfier::uri()']]]
 ];

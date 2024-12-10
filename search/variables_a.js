@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['params_1068',['params',['../structDidChangeTextDocumentNotification.html#ac6327515f4a4543b4022ea64321a09e3',1,'DidChangeTextDocumentNotification::params()'],['../structDidOpenTextDocumentNotification.html#aba78d22c11f43031de7f6c7a51fcf575',1,'DidOpenTextDocumentNotification::params()'],['../structHoverRequest.html#ac3788a628567005d3931307c583026bb',1,'HoverRequest::params()'],['../structInitializeRequest.html#a40cf81c7075a9ce35f558ebadde7f8ad',1,'InitializeRequest::params()']]],
-  ['position_1069',['position',['../structHoverParams.html#abe820134b8fc4934a9984f9486c9a3e8',1,'HoverParams::position()'],['../structTextDocumentPositionParams.html#a7db5d54168c86a677926dd693904235f',1,'TextDocumentPositionParams::position()']]]
+  ['name_1088',['name',['../structClientInfo.html#ad22832677acf7ac7e04b0a613ca5ba24',1,'ClientInfo::name()'],['../structServerInfo.html#ac1b6c30ed482012324aee9a240007158',1,'ServerInfo::name()'],['../classTipAlpha.html#a2b31365594e4de12c4574b610feecd39',1,'TipAlpha::name()']]],
+  ['node_1089',['node',['../classTipVar.html#aaac111ac8d6de9917ead0f47da1024d1',1,'TipVar']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['name_1066',['name',['../structClientInfo.html#ad22832677acf7ac7e04b0a613ca5ba24',1,'ClientInfo::name()'],['../structServerInfo.html#ac1b6c30ed482012324aee9a240007158',1,'ServerInfo::name()'],['../classTipAlpha.html#a2b31365594e4de12c4574b610feecd39',1,'TipAlpha::name()']]],
-  ['node_1067',['node',['../classTipVar.html#aaac111ac8d6de9917ead0f47da1024d1',1,'TipVar']]]
+  ['message_1086',['message',['../structDiagnostic.html#af6d2cee0cd4cda8e6e3fb6d2a1c4d4d3',1,'Diagnostic']]],
+  ['method_1087',['method',['../structDidChangeTextDocumentNotification.html#acbff85dc3f2718b8e4f01a3754beaf91',1,'DidChangeTextDocumentNotification::method()'],['../structDidOpenTextDocumentNotification.html#a57daf763474e05e5d5fc658aeb271f89',1,'DidOpenTextDocumentNotification::method()'],['../structInitializeRequest.html#ae4c3ea30339efe6ab6b165824dd99a2d',1,'InitializeRequest::method()'],['../structPublishDiagnosticsNotification.html#a2fe8102ae10d2c94f49cc44f0ea99af5',1,'PublishDiagnosticsNotification::method()'],['../structBaseMessage.html#a323ad7aa98e201d2081853df2167a719',1,'BaseMessage::method()']]]
 ];

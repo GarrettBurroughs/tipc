@@ -12,6 +12,8 @@ target_sources(
                ${CMAKE_CURRENT_SOURCE_DIR}/messages/TextDocument.h
                ${CMAKE_CURRENT_SOURCE_DIR}/messages/messages.h
                ${CMAKE_CURRENT_SOURCE_DIR}/messages/messages.cpp
+               ${CMAKE_CURRENT_SOURCE_DIR}/GetVariableNode.h
+               ${CMAKE_CURRENT_SOURCE_DIR}/GetVariableNode.cpp
            )
 
 target_include_directories(
@@ -24,6 +26,7 @@ target_include_directories(
             ${CMAKE_SOURCE_DIR}/src/semantic/types/concrete
             ${CMAKE_SOURCE_DIR}/src/semantic/types/constraints
             ${CMAKE_SOURCE_DIR}/src/semantic/types/solver
+            ${CMAKE_SOURCE_DIR}/src/semantic/weeding
             ${CMAKE_SOURCE_DIR}/src/semantic/cfa
             ${CMAKE_SOURCE_DIR}/src/semantic/weeding
             ${CMAKE_SOURCE_DIR}/src/frontend/ast
@@ -35,4 +38,6 @@ target_include_directories(
 target_link_libraries(lsp PRIVATE error
           coverage_config
           loguru
+          frontend
+          semantic
           nlohmann_json::nlohmann_json)

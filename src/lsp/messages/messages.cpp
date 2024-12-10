@@ -7,12 +7,25 @@ InitializeResponse newInitializeResponse(int id){
         id,
         InitializeResult {
             ServerCapabilities {
-                1 // Get full document
+                1, // Get full document
+                true,
+                false,
+                false
             },
             ServerInfo {
                 "tiplsp",
                 "0.0.1"
             }
+        }
+    };
+};
+
+HoverResponse newHoverResponse(int id, std::string contents){ 
+    return HoverResponse {
+        "2.0",
+        id,
+        HoverResult {
+            contents
         }
     };
 };

@@ -14,6 +14,7 @@
 
 #include "RPC.h"
 #include "LSPState.h"
+#include "messages/HoverRequest.h"
 #include "messages/messages.h"
 
 using json = nlohmann::json;
@@ -30,23 +31,24 @@ void handleMessage(LSPState& state, std::string method, std::vector<uint8_t> con
 
     if (method == "initialize") {
         InitializeRequest request = jsonContent.get<InitializeRequest>();
-        LOG_S(INFO) << "Connected to: " << request.params.clientInfo->name << " " << request.params.clientInfo->version;
 
         InitializeResponse result = newInitializeResponse(request.id);
         std::string message = EncodeMessage(result);
-        LOG_S(INFO) << message;
         std::cout << message;
+        LOG_S(INFO) << "Connected to: " << request.params.clientInfo->name << " " << request.params.clientInfo->version;
+
     } else if (method == "textDocument/didOpen") {
         DidOpenTextDocumentNotification request = jsonContent.get<DidOpenTextDocumentNotification>();
+
         state.openDocument(request.params.textDocument.uri, request.params.textDocument.text);
         LOG_S(INFO) << "Opened: " << request.params.textDocument.uri;
+
     } else if (method == "textDocument/didChange") {
         DidChangeTextDocumentNotification request = jsonContent.get<DidChangeTextDocumentNotification>();
 
         for (const TextDocumentContentChangeEvent changeEvent : request.params.contentChanges) {
             state.updateDocument(request.params.textDocument.uri, changeEvent.text);
         }
-
         LOG_S(INFO) << "Changed: " << request.params.textDocument.uri;
 
         // try {
@@ -64,6 +66,17 @@ void handleMessage(LSPState& state, std::string method, std::vector<uint8_t> con
         // } catch (std::exception e) {
         //     LOG_S(INFO) << e.what();
         // }
+    } else if (method == "textDocument/hover") {
+        HoverRequest request = jsonContent.get<HoverRequest>();
+        try {
+            HoverResponse result = state.hover(request);
+            std::string message = EncodeMessage(result);
+            std::cout << message;
+        } catch (std::exception e) {
+            HoverResponse result = newHoverResponse(request.id, "");
+            std::string message = EncodeMessage(result);
+            std::cout << message;
+        }
     }
 }
 

@@ -49,12 +49,12 @@ struct ServerInfo {
 // TODO: Potential improvements in textDocumentSync
 struct ServerCapabilities {
     int textDocumentSync;
-    // bool hoverProvider;
-    // bool definitionProvider;
-    // bool codeActionProvider;
+    bool hoverProvider;
+    bool definitionProvider;
+    bool codeActionProvider;
     // std::map<std::string, nlohmann::json> completionProvider;
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(ServerCapabilities, textDocumentSync)
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(ServerCapabilities, textDocumentSync, hoverProvider, definitionProvider, codeActionProvider)
 };
 
 struct InitializeResult {

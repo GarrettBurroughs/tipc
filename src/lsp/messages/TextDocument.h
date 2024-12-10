@@ -13,11 +13,31 @@ struct TextDocumentItem {
 };
 
 
+struct TextDocumentIdentfier {
+    std::string uri; 
+
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(TextDocumentIdentfier, uri)
+};
+
 struct VersionedTextDocumentIdentfier {
     std::string uri; 
     int version;
 
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(VersionedTextDocumentIdentfier, uri, version)
+};
+
+struct Position {
+    int line;
+    int character;
+
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Position, line, character)
+};
+
+struct TextDocumentPositionParams {
+    TextDocumentIdentfier textDocument;
+    Position position;
+    
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(TextDocumentPositionParams, textDocument, position)
 };
 
 

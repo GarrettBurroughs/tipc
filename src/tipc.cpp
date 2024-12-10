@@ -7,7 +7,6 @@
 #include "SemanticError.h"
 #include "loguru.hpp"
 #include "llvm/Support/CommandLine.h"
-#include <nlohmann/json.hpp>
 
 #include <fstream>
 

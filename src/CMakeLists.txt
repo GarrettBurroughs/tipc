@@ -50,17 +50,14 @@ target_link_libraries(
   PRIVATE error
           frontend
           semantic
-          codegen
-          optimizer
           antlr4_static
-          ${llvm_libs}
           coverage_config
           loguru
           lsp
           nlohmann_json::nlohmann_json)
 
 target_include_directories(
-  tipc
+  tiplsp
   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/error
           ${CMAKE_CURRENT_SOURCE_DIR}/frontend
           ${CMAKE_CURRENT_SOURCE_DIR}/frontend/ast

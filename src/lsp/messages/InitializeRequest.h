@@ -1,7 +1,8 @@
+#pragma once
+
 #include <optional>
 #include <string>
 #include <nlohmann/json.hpp>
-
 
 struct ClientInfo {
     std::string name;
@@ -45,14 +46,15 @@ struct ServerInfo {
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(ServerInfo, name, version)
 };
 
+// TODO: Potential improvements in textDocumentSync
 struct ServerCapabilities {
     int textDocumentSync;
-    bool hoverProvider;
-    bool definitionProvider;
-    bool codeActionProvider;
-    std::map<std::string, nlohmann::json> completionProvider;
+    // bool hoverProvider;
+    // bool definitionProvider;
+    // bool codeActionProvider;
+    // std::map<std::string, nlohmann::json> completionProvider;
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(ServerCapabilities, textDocumentSync, hoverProvider, definitionProvider, codeActionProvider, completionProvider)
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(ServerCapabilities, textDocumentSync)
 };
 
 struct InitializeResult {
@@ -62,7 +64,6 @@ struct InitializeResult {
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(InitializeResult, capabilities, serverInfo)
 };
 
-// TODO: Make id optional
 struct InitializeResponse {
 
     std::string jsonrpc;
@@ -88,5 +89,4 @@ struct InitializeResponse {
         r.result = j.at("result").get<InitializeResult>();
     }
 };
-
 

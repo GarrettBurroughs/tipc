@@ -1,12 +1,9 @@
 #include <catch2/catch_test_macros.hpp>
 #include <cstdio>
-#include <ostream>
 #include <string>
-#include <iostream>
 #include <nlohmann/json.hpp>
 
 #include "RPC.h"
-#include "LSP.h"
 
 using json = nlohmann::json;
 
@@ -36,6 +33,7 @@ TEST_CASE("Lsp: DecodeMessage", "[Lsp]") {
 //     input << "Content-Length: 18\r\n\r\n{\"Method\":\"test1\"}Content-Length: 18\r\n\r\n{\"Method\":\"test2\"}";
 //     input << EOF;
 //     std::ostringstream output; 
+// #include "LSP.h"
 //     startLsp(input, output);
 //     std::ostringstream expected; 
 //     expected << "Token: Content-Length: 18\r\n\r\n{\"Method\":\"test1\"}" << std::endl;

@@ -5,6 +5,7 @@
 #include <vector>
 #include <nlohmann/json.hpp>
 #include "ASTDeclNode.h"
+#include "ParseError.h"
 #include "loguru.hpp"
 
 
@@ -48,6 +49,17 @@ void handleMessage(LSPState& state, std::string method, std::vector<uint8_t> con
 
         for (const TextDocumentContentChangeEvent changeEvent : request.params.contentChanges) {
             state.updateDocument(request.params.textDocument.uri, changeEvent.text);
+        }
+        try {
+            std::stringstream program(state.getDocument(request.params.textDocument.uri));
+            FrontEnd::parse(program);
+            auto diagnosticNotification = newPublishDiagnosticsNotificationEmpty(request.params.textDocument);
+            std::string message = EncodeMessage(diagnosticNotification);
+            std::cout << message;
+        } catch (ParseError e) {
+            auto diagnosticNotification = newPublishDiagnosticsNotificationError(request.params.textDocument, e.what());
+            std::string message = EncodeMessage(diagnosticNotification);
+            std::cout << message;
         }
         LOG_S(INFO) << "Changed: " << request.params.textDocument.uri;
 

@@ -52,6 +52,21 @@ bool GetVariableNode::visit(ASTDeclNode *element) {
     return true;
 }
 
+
+bool GetVariableNode::visit(ASTFunAppExpr *element) {
+    if (valid) return false;
+    if (
+            element->getLine() - 1 == line && 
+            element->getColumn() == column
+    ) {
+        isFn = false;
+        valid = true;
+        function = currentFunction;
+        return false;
+    }
+    return true;
+}
+
 std::optional<ASTDeclNode*> GetVariableNode::getNode() {
     if (valid) {
         return function->getDecl();

@@ -22,6 +22,7 @@ public:
   virtual bool visit(ASTFunction *element) override;
   virtual bool visit(ASTVariableExpr *element) override;
   virtual bool visit(ASTDeclNode *element) override;
+  virtual bool visit(ASTFunAppExpr *element) override;
   std::optional<ASTDeclNode*> getNode();
   bool isFunction();
 };

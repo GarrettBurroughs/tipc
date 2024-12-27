@@ -42,8 +42,8 @@ public:
   void add(std::vector<TypeConstraint>);
 
   /*! \brief Solve the system of constraints that have presented to this
-   * unifier. 
-   * \pre The unifier has been constructed with seed values. 
+   * unifier.
+   * \pre The unifier has been constructed with seed values.
    * Incremental solving can be achieved by adding constraints, via
    * the add method, after solving.  This will cause the new constraints
    * to be unified with the currently unified constraints.

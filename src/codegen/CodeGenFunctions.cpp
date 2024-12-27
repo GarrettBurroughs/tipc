@@ -97,7 +97,7 @@ llvm::Constant *oneV =
  * dispatch table.
  */
 
-llvm::Function *getFunction(const std::string& functionName) {
+llvm::Function *getFunction(const std::string &functionName) {
   auto formalNames = functionFormalNames[functionName];
 
   /*

@@ -42,13 +42,15 @@ void Optimizer::optimize(llvm::Module *theModule) {
   // Constructs SSA and is a pre-requisite for many other passes
   functionPassManager.addPass(llvm::PromotePass());
 
-  // Instruction combine pass scans for a variety of patterns and replaces bitcodes matched with improvements.
+  // Instruction combine pass scans for a variety of patterns and replaces
+  // bitcodes matched with improvements.
   functionPassManager.addPass(llvm::InstCombinePass());
 
   // Reassociate expressions.
   functionPassManager.addPass(llvm::ReassociatePass());
 
-  // Eliminate Common SubExpressions using the Global Value Numbering (GVN) algorithm.
+  // Eliminate Common SubExpressions using the Global Value Numbering (GVN)
+  // algorithm.
   functionPassManager.addPass(llvm::GVNPass());
 
   // Simplify the control flow graph (deleting unreachable blocks, etc).

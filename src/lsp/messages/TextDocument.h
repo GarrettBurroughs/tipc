@@ -1,56 +1,57 @@
-#pragma once 
+#pragma once
 
 #include "nlohmann/detail/macro_scope.hpp"
-#include <string>
 #include <nlohmann/json.hpp>
+#include <string>
 
 struct TextDocumentItem {
-    std::string uri; 
-    std::string languageId; 
-    int version; 
-    std::string text;
+  std::string uri;
+  std::string languageId;
+  int version;
+  std::string text;
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(TextDocumentItem, uri, languageId, version, text)
+  NLOHMANN_DEFINE_TYPE_INTRUSIVE(TextDocumentItem, uri, languageId, version,
+                                 text)
 };
 
-
 struct TextDocumentIdentfier {
-    std::string uri; 
+  std::string uri;
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(TextDocumentIdentfier, uri)
+  NLOHMANN_DEFINE_TYPE_INTRUSIVE(TextDocumentIdentfier, uri)
 };
 
 struct VersionedTextDocumentIdentfier {
-    std::string uri; 
-    int version;
+  std::string uri;
+  int version;
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(VersionedTextDocumentIdentfier, uri, version)
+  NLOHMANN_DEFINE_TYPE_INTRUSIVE(VersionedTextDocumentIdentfier, uri, version)
 };
 
 struct Position {
-    int line;
-    int character;
+  int line;
+  int character;
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Position, line, character)
+  NLOHMANN_DEFINE_TYPE_INTRUSIVE(Position, line, character)
 };
 
 struct TextDocumentPositionParams {
-    TextDocumentIdentfier textDocument;
-    Position position;
-    
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(TextDocumentPositionParams, textDocument, position)
+  TextDocumentIdentfier textDocument;
+  Position position;
+
+  NLOHMANN_DEFINE_TYPE_INTRUSIVE(TextDocumentPositionParams, textDocument,
+                                 position)
 };
 
 struct Range {
-    Position start;
-    Position end;
+  Position start;
+  Position end;
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(Range, start, end)
+  NLOHMANN_DEFINE_TYPE_INTRUSIVE(Range, start, end)
 };
 
 struct TextEdit {
-	Range range;
-    std::string newText;
+  Range range;
+  std::string newText;
 
-    NLOHMANN_DEFINE_TYPE_INTRUSIVE(TextEdit, range, newText)
+  NLOHMANN_DEFINE_TYPE_INTRUSIVE(TextEdit, range, newText)
 };

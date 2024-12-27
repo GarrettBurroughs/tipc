@@ -1,5 +1,6 @@
 #pragma once 
 
+#include "nlohmann/detail/macro_scope.hpp"
 #include <string>
 #include <nlohmann/json.hpp>
 
@@ -45,4 +46,11 @@ struct Range {
     Position end;
 
     NLOHMANN_DEFINE_TYPE_INTRUSIVE(Range, start, end)
+};
+
+struct TextEdit {
+	Range range;
+    std::string newText;
+
+    NLOHMANN_DEFINE_TYPE_INTRUSIVE(TextEdit, range, newText)
 };

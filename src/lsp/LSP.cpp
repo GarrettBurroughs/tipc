@@ -15,6 +15,7 @@
 
 #include "RPC.h"
 #include "LSPState.h"
+#include "messages/DocumentFormattingRequest.h"
 #include "messages/HoverRequest.h"
 #include "messages/messages.h"
 
@@ -74,6 +75,22 @@ void handleMessage(LSPState& state, std::string method, std::vector<uint8_t> con
             std::string message = EncodeMessage(result);
             std::cout << message;
         }
+    } else if (method == "textDocument/formatting") {
+        DocumentFormattingRequest request = jsonContent.get<DocumentFormattingRequest>();
+        std::string document = state.getDocument(request.params.textDocument.uri);
+        std::stringstream program(document);
+        try {
+            auto ast = FrontEnd::parse(program);
+            std::stringstream output;
+            FrontEnd::prettyprint(ast.get(), output);
+            auto result = newDocumentFormattingResponse(request.id, document, output.str());
+            std::string message = EncodeMessage(result);
+            std::cout << message;
+        } catch (std::exception e) {
+            // TODO: Fix error handling here
+            LOG_S(INFO) << "Failed to format document";
+        }
+
     }
 }
 

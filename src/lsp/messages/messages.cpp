@@ -9,10 +9,11 @@ InitializeResponse newInitializeResponse(int id){
         id,
         InitializeResult {
             ServerCapabilities {
-                1, // Get full document
-                true,
-                false,
-                false
+                1,      // textDocumentSync
+                true,   // hoverProvider
+                false,  // definitionProvide
+                false,  // codeActionProvider
+                true,   // documentFormattingProvider
             },
             ServerInfo {
                 "tiplsp",
@@ -74,5 +75,40 @@ PublishDiagnosticsNotification newPublishDiagnosticsNotificationEmpty(VersionedT
         }
 
 
+    };
+}
+
+std::pair<int, int> findEndPosition(const std::string& contents) {
+    std::istringstream stream(contents);
+    std::string line;
+    int row = 0;
+    int charPosition = 0;
+
+    // Process each line in the string
+    while (std::getline(stream, line)) {
+        row++;
+        charPosition = line.size(); // Update to the length of the last line
+    }
+
+    return {row, charPosition};
+}
+
+DocumentFormattingResponse newDocumentFormattingResponse(int id, std::string original, std::string contents) {
+
+    auto [endRow, endChar] = findEndPosition(original);
+    auto formattedDocument = 
+        {
+            TextEdit {
+                Range {
+                    Position { 0, 0 },
+                    Position { endRow, endChar },
+                }, 
+                contents
+            }
+        };
+    return DocumentFormattingResponse {
+        "2.0",
+        id,
+        formattedDocument
     };
 }

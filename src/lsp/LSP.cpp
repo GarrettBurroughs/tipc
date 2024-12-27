@@ -63,21 +63,6 @@ void handleMessage(LSPState& state, std::string method, std::vector<uint8_t> con
         }
         LOG_S(INFO) << "Changed: " << request.params.textDocument.uri;
 
-        // try {
-        //     std::stringstream inputStream(state.getDocument(request.params.textDocument.uri));
-        //     std::shared_ptr<ASTProgram> ast = FrontEnd::parse(inputStream);
-        //     auto analysisResults = SemanticAnalysis::analyze(ast.get(), false);
-        //     auto symbolTable = analysisResults->getSymbolTable();
-        //     auto mainFn = symbolTable->getFunction("main");
-        //     auto xVar = symbolTable->getLocal("x", mainFn);
-        //     auto typeResults = analysisResults->getTypeResults();
-        //     auto mainType = typeResults->getInferredType(mainFn);
-        //     auto xType = typeResults->getInferredType(xVar);
-        //     LOG_S(INFO) << *mainType;
-        //     LOG_S(INFO) << *xType;
-        // } catch (std::exception e) {
-        //     LOG_S(INFO) << e.what();
-        // }
     } else if (method == "textDocument/hover") {
         HoverRequest request = jsonContent.get<HoverRequest>();
         try {
@@ -116,7 +101,6 @@ private:
     std::string buffer;
     size_t expectedSize = 0;
 
-    // TODO: Figure out if we can read more data at a time? 
     void read() {
         char data[1];
         inputStream.read(data, sizeof(data));
@@ -170,7 +154,6 @@ void startLsp(std::istream& in, std::ostream& out) {
             std::string line = parser.getNextToken();
             std::vector<uint8_t> msg(line.begin(), line.end());
 
-            // LOG_S(INFO) << "Token: " << line;
             auto [method, contents] = DecodeMessage(msg);
 
             handleMessage(state, method, contents);
@@ -181,6 +164,7 @@ void startLsp(std::istream& in, std::ostream& out) {
     }
 }
 
+// TODO: Implement proper arguments/help
 int main(int argc, char *argv[]) {
     loguru::g_stderr_verbosity = 0;
     loguru::g_preamble = false;
@@ -190,8 +174,10 @@ int main(int argc, char *argv[]) {
     loguru::g_preamble_thread = false;
     loguru::g_colorlogtostderr = false;
 
-    // TODO: Remove this log file when finished (or add option for enabling loggin)
-    loguru::add_file("/home/gburroughs/dev/tipc_test/log.txt", loguru::Append, loguru::Verbosity_INFO);
+    if (argc > 1) {
+        loguru::add_file(argv[1], loguru::Append, loguru::Verbosity_INFO);
+    }
+
     startLsp(std::cin, std::cout);
     return 0;
 }

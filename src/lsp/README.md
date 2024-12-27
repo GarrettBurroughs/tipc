@@ -20,7 +20,7 @@ Currently, the TIP language server supports:
 
 [x] Parsing Errors
 [x] Type information
-[ ] Code Formatting
+[x] Code Formatting
 [ ] Go to definition
 [ ] Autocompletion
 

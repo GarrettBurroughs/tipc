@@ -27,9 +27,8 @@ void AbsentFieldChecker::endVisit(ASTAccessExpr *element) {
   if (std::dynamic_pointer_cast<TipAbsentField>(inferredType) != nullptr) {
     std::stringstream sstream;
     sstream << element;
-    throw SemanticError("Access to absent field on line " +
-                        std::to_string(element->getLine()) + " in column " +
-                        std::to_string(element->getColumn()) + ": " +
-                        sstream.str());
+    throw SemanticError("Access to absent field: " + sstream.str() + "@" +
+                        std::to_string(element->getLine()) + ":" +
+                        std::to_string(element->getColumn()));
   }
 }

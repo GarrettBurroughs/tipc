@@ -38,7 +38,7 @@ void CheckAssignable::endVisit(ASTAssignStmt *element) {
     return;
 
   std::ostringstream oss;
-  oss << "Assignment error on line " << element->getLine() << ": ";
+  oss << "Assignment error :";
   if (dynamic_cast<ASTAccessExpr *>(element->getLHS())) {
     ASTAccessExpr *access = dynamic_cast<ASTAccessExpr *>(element->getLHS());
     oss << *access->getRecord()
@@ -46,6 +46,7 @@ void CheckAssignable::endVisit(ASTAssignStmt *element) {
   } else {
     oss << *element->getLHS() << " not an l-value\n";
   }
+  oss << "@" << element->getLine() << ":" << element->getColumn();
   throw SemanticError(oss.str());
 }
 
@@ -56,8 +57,10 @@ void CheckAssignable::endVisit(ASTRefExpr *element) {
     return;
 
   std::ostringstream oss;
-  oss << "Address of error on line " << element->getLine() << ": ";
+  oss << "Address of error: ";
   oss << *element->getVar() << " not an l-value\n";
+
+  oss << "@" << element->getLine() << ":" << element->getColumn();
   throw SemanticError(oss.str());
 }
 

@@ -3,6 +3,7 @@
 #include "loguru.hpp"
 #include <exception>
 #include <iostream>
+#include <mutex>
 #include <nlohmann/json.hpp>
 #include <sstream>
 #include <string>
@@ -21,8 +22,15 @@
 
 using json = nlohmann::json;
 
+void transmitMessage(const json &msg, std::mutex &writeLock) {
+  std::string message = EncodeMessage(msg);
+  writeLock.lock();
+  std::cout << message;
+  writeLock.unlock();
+}
+
 void handleMessage(LSPState &state, std::string method,
-                   std::vector<uint8_t> contents) {
+                   std::vector<uint8_t> contents, std::mutex &writeLock) {
   LOG_S(INFO) << "Recieved method: " << method;
 
   nlohmann::json jsonContent;
@@ -37,8 +45,7 @@ void handleMessage(LSPState &state, std::string method,
     InitializeRequest request = jsonContent.get<InitializeRequest>();
 
     InitializeResponse response = newInitializeResponse(request.id);
-    std::string message = EncodeMessage(response);
-    std::cout << message;
+    transmitMessage(response, writeLock);
     LOG_S(INFO) << "Connected to: " << request.params.clientInfo->name << " "
                 << request.params.clientInfo->version;
 
@@ -68,16 +75,14 @@ void handleMessage(LSPState &state, std::string method,
       /*     diagnosticsNotification =
        * newPublishDiagnosticsNotificationEmpty(request.params.textDocument); */
       /* } */
-      std::string message = EncodeMessage(diagnosticsNotification);
-      std::cout << message;
+      transmitMessage(diagnosticsNotification, writeLock);
     }
     LOG_S(INFO) << "Changed: " << request.params.textDocument.uri;
 
   } else if (method == "textDocument/hover") {
     HoverRequest request = jsonContent.get<HoverRequest>();
     HoverResponse response = state.hover(request);
-    std::string message = EncodeMessage(response);
-    std::cout << message;
+    transmitMessage(response, writeLock);
 
   } else if (method == "textDocument/formatting") {
     DocumentFormattingRequest request =
@@ -93,8 +98,7 @@ void handleMessage(LSPState &state, std::string method,
     } else {
       response = newNullDocumentFormattingResponse(request.id);
     }
-    std::string message = EncodeMessage(response);
-    std::cout << message;
+    transmitMessage(response, writeLock);
   }
 }
 
@@ -166,7 +170,8 @@ void startLsp(std::istream &in, std::ostream &out) {
   std::string input;
 
   StreamParser parser(in);
-  LSPState state;
+  std::mutex writeLock;
+  LSPState state(writeLock);
 
   while (true) {
     try {
@@ -176,7 +181,7 @@ void startLsp(std::istream &in, std::ostream &out) {
 
       auto [method, contents] = DecodeMessage(msg);
 
-      handleMessage(state, method, contents);
+      handleMessage(state, method, contents, writeLock);
     } catch (const std::exception &e) {
       LOG_S(ERROR) << "LSP Error " << e.what();
       break;

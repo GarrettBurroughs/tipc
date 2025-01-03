@@ -21,26 +21,28 @@ auto runBackgroundSemanticAnalysis(
     std::mutex &lock,
     std::map<std::string, std::optional<std::shared_ptr<SemanticAnalysis>>>
         &analysisMap,
-    std::map<std::string, int> &versionMap) {
+    std::map<std::string, int> &versionMap, std::mutex &writeLock) {
   std::function<void()> update = [uri, ast, version, &lock, &analysisMap,
-                                  &versionMap]() {
+                                  &versionMap, &writeLock]() {
     try {
       auto analysisResult = SemanticAnalysis::analyze(ast.get(), false);
-      lock.lock();
+
       if (version == versionMap[uri]) {
+        lock.lock();
         analysisMap[uri] = analysisResult;
+        lock.unlock();
 
         VersionedTextDocumentIdentfier documentIdentifier = {uri, version};
         auto diagnosticsNotification =
             newPublishDiagnosticsNotificationEmpty(documentIdentifier);
         auto message = EncodeMessage(diagnosticsNotification);
 
-        // TODO: Make thread safe
+        writeLock.lock();
         std::cout << message;
+        writeLock.unlock();
       }
-      lock.unlock();
     } catch (SemanticError e) {
-      lock.lock();
+      LOG_S(INFO) << e.what();
       if (version == versionMap[uri]) {
 
         VersionedTextDocumentIdentfier documentIdentifier = {uri, version};
@@ -48,10 +50,10 @@ auto runBackgroundSemanticAnalysis(
             documentIdentifier, e.what());
         auto message = EncodeMessage(diagnosticsNotification);
 
-        // TODO: Make thread safe
+        writeLock.lock();
         std::cout << message;
+        writeLock.unlock();
       }
-      lock.unlock();
     }
   };
   return std::async(std::launch::async, std::move(update));
@@ -78,8 +80,9 @@ std::optional<ParseError> LSPState::openDocument(std::string uri,
     return e;
   }
   lock.unlock();
+  LOG_S(INFO) << "Running Semantic Analysis";
   runBackgroundSemanticAnalysis(uri, asts[uri], 0, lock, analysisResults,
-                                versions);
+                                versions, writeLock);
   return std::nullopt;
 }
 
@@ -99,8 +102,9 @@ LSPState::updateDocument(std::string uri, std::string text, int version) {
     return e;
   }
   lock.unlock();
+  LOG_S(INFO) << "Running Semantic Analysis";
   runBackgroundSemanticAnalysis(uri, asts[uri], version, lock, analysisResults,
-                                versions);
+                                versions, writeLock);
   return std::nullopt;
 }
 
@@ -185,10 +189,14 @@ HoverResponse LSPState::hover(HoverRequest request) {
     if (analysisResults[uri]) {
       analysisResult = analysisResults[uri].value();
     } else {
-      analysisResult = SemanticAnalysis::analyze(ast.get(), false);
-      lock.lock();
-      analysisResults[uri] = analysisResult;
-      lock.unlock();
+      try {
+        analysisResult = SemanticAnalysis::analyze(ast.get(), false);
+        lock.lock();
+        analysisResults[uri] = analysisResult;
+        lock.unlock();
+      } catch (SemanticError e) {
+        return newHoverResponse(request.id, "");
+      }
     }
 
     auto symbolTable = analysisResult->getSymbolTable();

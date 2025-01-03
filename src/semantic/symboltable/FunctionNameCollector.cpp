@@ -20,9 +20,9 @@ bool FunctionNameCollector::visit(ASTFunction *element) {
     fMap.insert(std::pair<std::string, std::pair<ASTDeclNode *, bool>>(
         decl->getName(), declPolyPair));
   } else {
-    throw SemanticError("Symbol error on line " +
-                        std::to_string(decl->getLine()) + ": function name " +
-                        decl->getName() + " already declared\n");
+    throw SemanticError(decl->getName() + " already declared " + "@" +
+                        std::to_string(element->getLine()) + ":" +
+                        std::to_string(element->getColumn()));
   }
   return false;
 }

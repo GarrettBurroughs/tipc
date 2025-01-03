@@ -1,6 +1,7 @@
 #include "LocalNameCollector.h"
 #include "SemanticError.h"
 #include "loguru.hpp"
+#include <string>
 
 std::map<ASTDeclNode *, std::map<std::string, ASTDeclNode *>>
 LocalNameCollector::build(
@@ -39,16 +40,15 @@ void LocalNameCollector::endVisit(ASTDeclNode *element) {
         curMap.insert(
             std::pair<std::string, ASTDeclNode *>(element->getName(), element));
       } else {
-        throw SemanticError(
-            "Symbol error line " + std::to_string(element->getLine()) +
-            " in column " + std::to_string(element->getColumn()) + ": " +
-            element->getName() + " redeclared in function " + funName + "\n");
+        throw SemanticError(element->getName() + " redeclared in function " +
+                            funName + "@" + std::to_string(element->getLine()) +
+                            ":" + std::to_string(element->getColumn()));
       }
     } else {
-      throw SemanticError(
-          "Symbol error line " + std::to_string(element->getLine()) +
-          " in column " + std::to_string(element->getColumn()) + ": " +
-          element->getName() + " already declared as function\n");
+      throw SemanticError(element->getName() +
+                          " already declared as a function " + funName + "@" +
+                          std::to_string(element->getLine()) + ":" +
+                          std::to_string(element->getColumn()));
     }
   }
 }
@@ -56,10 +56,9 @@ void LocalNameCollector::endVisit(ASTDeclNode *element) {
 void LocalNameCollector::endVisit(ASTVariableExpr *element) {
   if (fMap.count(element->getName()) == 0) {
     if (curMap.count(element->getName()) == 0) {
-      throw SemanticError(
-          "Symbol error line " + std::to_string(element->getLine()) +
-          " in column " + std::to_string(element->getColumn()) + ": " +
-          element->getName() + " undeclared in function " + funName + "\n");
+      throw SemanticError(element->getName() + " undeclared in function " +
+                          funName + "@" + std::to_string(element->getLine()) +
+                          ":" + std::to_string(element->getColumn()));
     }
   }
 }

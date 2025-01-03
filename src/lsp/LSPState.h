@@ -20,12 +20,13 @@ private:
       analysisResults;
   std::map<std::string, int> versions;
   std::mutex lock;
+  std::mutex &writeLock;
   std::vector<std::string> splitLines(const std::string &content);
   std::pair<int, std::string> getWordAtCursor(const std::string &content,
                                               int line, int character);
 
 public:
-  LSPState() : documents() {}
+  LSPState(std::mutex &writeLock) : documents(), writeLock(writeLock) {}
 
   std::optional<ParseError> openDocument(std::string uri, std::string text);
   std::optional<ParseError> updateDocument(std::string uri, std::string text,

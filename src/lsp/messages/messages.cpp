@@ -22,7 +22,16 @@ HoverResponse newHoverResponse(int id, std::string contents) {
 
 PublishDiagnosticsNotification newPublishDiagnosticsNotificationError(
     VersionedTextDocumentIdentfier textDocument, std::string error) {
+
   size_t atPos = error.find('@');
+  if (atPos == std::string::npos) {
+    return PublishDiagnosticsNotification{
+        "2.0", "textDocument/publishDiagnostics",
+        PublishDiagnosticsParams{
+            textDocument.uri,
+            textDocument.version,
+            {Diagnostic{Range{Position{0, 0}, Position{0, 0}}, 1, error}}}};
+  }
   std::string numbersPart = error.substr(atPos + 1);
   size_t commaPos = numbersPart.find(',');
   int line = std::stoi(numbersPart.substr(0, commaPos)) - 1;

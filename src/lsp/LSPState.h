@@ -28,7 +28,8 @@ public:
   LSPState() : documents() {}
 
   std::optional<ParseError> openDocument(std::string uri, std::string text);
-  std::optional<ParseError> updateDocument(std::string uri, std::string text);
+  std::optional<ParseError> updateDocument(std::string uri, std::string text,
+                                           int version);
   std::string getDocument(std::string uri);
   std::optional<std::shared_ptr<ASTProgram>> getAst(std::string uri);
   std::optional<std::shared_ptr<ASTProgram>> getUpdatedAst(std::string uri);

@@ -3,16 +3,18 @@
 #include "FrontEnd.h"
 #include "GetVariableNode.h"
 #include "ParseError.h"
+#include "RPC.h"
 #include "SemanticAnalysis.h"
+#include "SemanticError.h"
+#include "TextDocument.h"
 #include "loguru.hpp"
 #include "messages.h"
+
 #include <functional>
 #include <future>
-#include <memory>
 #include <mutex>
 #include <optional>
 #include <sstream>
-#include <thread>
 
 auto runBackgroundSemanticAnalysis(
     std::string uri, std::shared_ptr<ASTProgram> ast, int version,
@@ -22,12 +24,35 @@ auto runBackgroundSemanticAnalysis(
     std::map<std::string, int> &versionMap) {
   std::function<void()> update = [uri, ast, version, &lock, &analysisMap,
                                   &versionMap]() {
-    auto analysisResult = SemanticAnalysis::analyze(ast.get(), false);
-    lock.lock();
-    if (version == versionMap[uri]) {
-      analysisMap[uri] = analysisResult;
+    try {
+      auto analysisResult = SemanticAnalysis::analyze(ast.get(), false);
+      lock.lock();
+      if (version == versionMap[uri]) {
+        analysisMap[uri] = analysisResult;
+
+        VersionedTextDocumentIdentfier documentIdentifier = {uri, version};
+        auto diagnosticsNotification =
+            newPublishDiagnosticsNotificationEmpty(documentIdentifier);
+        auto message = EncodeMessage(diagnosticsNotification);
+
+        // TODO: Make thread safe
+        std::cout << message;
+      }
+      lock.unlock();
+    } catch (SemanticError e) {
+      lock.lock();
+      if (version == versionMap[uri]) {
+
+        VersionedTextDocumentIdentfier documentIdentifier = {uri, version};
+        auto diagnosticsNotification = newPublishDiagnosticsNotificationError(
+            documentIdentifier, e.what());
+        auto message = EncodeMessage(diagnosticsNotification);
+
+        // TODO: Make thread safe
+        std::cout << message;
+      }
+      lock.unlock();
     }
-    lock.unlock();
   };
   return std::async(std::launch::async, std::move(update));
 }
@@ -49,6 +74,7 @@ std::optional<ParseError> LSPState::openDocument(std::string uri,
     updatedAst[uri] = true;
   } catch (ParseError e) {
     updatedAst[uri] = false;
+    lock.unlock();
     return e;
   }
   lock.unlock();
@@ -57,11 +83,11 @@ std::optional<ParseError> LSPState::openDocument(std::string uri,
   return std::nullopt;
 }
 
-std::optional<ParseError> LSPState::updateDocument(std::string uri,
-                                                   std::string text) {
+std::optional<ParseError>
+LSPState::updateDocument(std::string uri, std::string text, int version) {
   lock.lock();
   documents[uri] = text;
-  versions[uri] += 1;
+  versions[uri] = version;
   std::stringstream stream(text);
   analysisResults[uri] = std::nullopt;
   try {
@@ -69,12 +95,12 @@ std::optional<ParseError> LSPState::updateDocument(std::string uri,
     updatedAst[uri] = true;
   } catch (ParseError e) {
     updatedAst[uri] = false;
+    lock.unlock();
     return e;
   }
-  int currentVersion = versions[uri];
   lock.unlock();
-  runBackgroundSemanticAnalysis(uri, asts[uri], currentVersion, lock,
-                                analysisResults, versions);
+  runBackgroundSemanticAnalysis(uri, asts[uri], version, lock, analysisResults,
+                                versions);
   return std::nullopt;
 }
 

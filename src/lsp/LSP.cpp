@@ -57,15 +57,17 @@ void handleMessage(LSPState &state, std::string method,
     for (const TextDocumentContentChangeEvent changeEvent :
          request.params.contentChanges) {
       auto error = state.updateDocument(request.params.textDocument.uri,
-                                        changeEvent.text);
+                                        changeEvent.text,
+                                        request.params.textDocument.version);
       PublishDiagnosticsNotification diagnosticsNotification;
       if (error) {
         diagnosticsNotification = newPublishDiagnosticsNotificationError(
             request.params.textDocument, error.value().what());
-      } else {
-        diagnosticsNotification =
-            newPublishDiagnosticsNotificationEmpty(request.params.textDocument);
       }
+      /* else { */
+      /*     diagnosticsNotification =
+       * newPublishDiagnosticsNotificationEmpty(request.params.textDocument); */
+      /* } */
       std::string message = EncodeMessage(diagnosticsNotification);
       std::cout << message;
     }

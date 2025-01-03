@@ -1,15 +1,41 @@
 #include "LSPState.h"
+#include "ASTProgram.h"
 #include "FrontEnd.h"
 #include "GetVariableNode.h"
 #include "ParseError.h"
 #include "SemanticAnalysis.h"
 #include "loguru.hpp"
 #include "messages.h"
+#include <functional>
+#include <future>
+#include <memory>
+#include <mutex>
 #include <optional>
 #include <sstream>
+#include <thread>
+
+auto runBackgroundSemanticAnalysis(
+    std::string uri, std::shared_ptr<ASTProgram> ast, int version,
+    std::mutex &lock,
+    std::map<std::string, std::optional<std::shared_ptr<SemanticAnalysis>>>
+        &analysisMap,
+    std::map<std::string, int> &versionMap) {
+  std::function<void()> update = [uri, ast, version, &lock, &analysisMap,
+                                  &versionMap]() {
+    auto analysisResult = SemanticAnalysis::analyze(ast.get(), false);
+    lock.lock();
+    if (version == versionMap[uri]) {
+      analysisMap[uri] = analysisResult;
+    }
+    lock.unlock();
+  };
+  return std::async(std::launch::async, std::move(update));
+}
 
 std::optional<ParseError> LSPState::openDocument(std::string uri,
                                                  std::string text) {
+  lock.lock();
+  versions[uri] = 0;
   documents[uri] = text;
   std::stringstream stream(text);
   analysisResults[uri] = std::nullopt;
@@ -25,12 +51,17 @@ std::optional<ParseError> LSPState::openDocument(std::string uri,
     updatedAst[uri] = false;
     return e;
   }
+  lock.unlock();
+  runBackgroundSemanticAnalysis(uri, asts[uri], 0, lock, analysisResults,
+                                versions);
   return std::nullopt;
 }
 
 std::optional<ParseError> LSPState::updateDocument(std::string uri,
                                                    std::string text) {
+  lock.lock();
   documents[uri] = text;
+  versions[uri] += 1;
   std::stringstream stream(text);
   analysisResults[uri] = std::nullopt;
   try {
@@ -40,6 +71,10 @@ std::optional<ParseError> LSPState::updateDocument(std::string uri,
     updatedAst[uri] = false;
     return e;
   }
+  int currentVersion = versions[uri];
+  lock.unlock();
+  runBackgroundSemanticAnalysis(uri, asts[uri], currentVersion, lock,
+                                analysisResults, versions);
   return std::nullopt;
 }
 
@@ -125,7 +160,9 @@ HoverResponse LSPState::hover(HoverRequest request) {
       analysisResult = analysisResults[uri].value();
     } else {
       analysisResult = SemanticAnalysis::analyze(ast.get(), false);
+      lock.lock();
       analysisResults[uri] = analysisResult;
+      lock.unlock();
     }
 
     auto symbolTable = analysisResult->getSymbolTable();

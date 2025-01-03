@@ -5,6 +5,7 @@
 #include "SemanticAnalysis.h"
 #include "messages/HoverRequest.h"
 #include <map>
+#include <mutex>
 #include <optional>
 #include <string>
 
@@ -17,6 +18,8 @@ private:
   std::map<std::string, bool> updatedAst;
   std::map<std::string, std::optional<std::shared_ptr<SemanticAnalysis>>>
       analysisResults;
+  std::map<std::string, int> versions;
+  std::mutex lock;
   std::vector<std::string> splitLines(const std::string &content);
   std::pair<int, std::string> getWordAtCursor(const std::string &content,
                                               int line, int character);

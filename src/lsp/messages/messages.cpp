@@ -1,6 +1,7 @@
 #include "messages.h"
 #include "PublishDiagnosticsNotification.h"
 #include "TextDocument.h"
+#include <optional>
 
 InitializeResponse newInitializeResponse(int id) {
   return InitializeResponse{
@@ -75,4 +76,8 @@ DocumentFormattingResponse newDocumentFormattingResponse(int id,
                                      },
                                      contents}};
   return DocumentFormattingResponse{"2.0", id, formattedDocument};
+}
+
+DocumentFormattingResponse newNullDocumentFormattingResponse(int id) {
+  return DocumentFormattingResponse{"2.0", id, std::nullopt};
 }

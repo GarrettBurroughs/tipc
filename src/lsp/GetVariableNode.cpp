@@ -2,6 +2,7 @@
 #include "ASTDeclNode.h"
 #include "ASTFunction.h"
 #include "ASTVariableExpr.h"
+#include "loguru.hpp"
 
 #include <optional>
 
@@ -49,8 +50,9 @@ bool GetVariableNode::visit(ASTDeclNode *element) {
 bool GetVariableNode::visit(ASTFunAppExpr *element) {
   if (valid)
     return false;
-  if (element->getLine() - 1 == line && element->getColumn() == column) {
-    isFn = false;
+  auto fn = element->getFunction();
+  if (fn->getLine() - 1 == line && fn->getColumn() == column) {
+    isFn = true;
     valid = true;
     function = currentFunction;
     return false;

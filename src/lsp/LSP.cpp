@@ -16,6 +16,7 @@
 #include "RPC.h"
 #include "messages/DocumentFormattingRequest.h"
 #include "messages/HoverRequest.h"
+#include "messages/PublishDiagnosticsNotification.h"
 #include "messages/messages.h"
 
 using json = nlohmann::json;
@@ -35,8 +36,8 @@ void handleMessage(LSPState &state, std::string method,
   if (method == "initialize") {
     InitializeRequest request = jsonContent.get<InitializeRequest>();
 
-    InitializeResponse result = newInitializeResponse(request.id);
-    std::string message = EncodeMessage(result);
+    InitializeResponse response = newInitializeResponse(request.id);
+    std::string message = EncodeMessage(response);
     std::cout << message;
     LOG_S(INFO) << "Connected to: " << request.params.clientInfo->name << " "
                 << request.params.clientInfo->version;
@@ -55,52 +56,43 @@ void handleMessage(LSPState &state, std::string method,
 
     for (const TextDocumentContentChangeEvent changeEvent :
          request.params.contentChanges) {
-      state.updateDocument(request.params.textDocument.uri, changeEvent.text);
-    }
-    try {
-      std::stringstream program(
-          state.getDocument(request.params.textDocument.uri));
-      FrontEnd::parse(program);
-      auto diagnosticNotification =
-          newPublishDiagnosticsNotificationEmpty(request.params.textDocument);
-      std::string message = EncodeMessage(diagnosticNotification);
-      std::cout << message;
-    } catch (ParseError e) {
-      auto diagnosticNotification = newPublishDiagnosticsNotificationError(
-          request.params.textDocument, e.what());
-      std::string message = EncodeMessage(diagnosticNotification);
+      auto error = state.updateDocument(request.params.textDocument.uri,
+                                        changeEvent.text);
+      PublishDiagnosticsNotification diagnosticsNotification;
+      if (error) {
+        diagnosticsNotification = newPublishDiagnosticsNotificationError(
+            request.params.textDocument, error.value().what());
+      } else {
+        diagnosticsNotification =
+            newPublishDiagnosticsNotificationEmpty(request.params.textDocument);
+      }
+      std::string message = EncodeMessage(diagnosticsNotification);
       std::cout << message;
     }
     LOG_S(INFO) << "Changed: " << request.params.textDocument.uri;
 
   } else if (method == "textDocument/hover") {
     HoverRequest request = jsonContent.get<HoverRequest>();
-    try {
-      HoverResponse result = state.hover(request);
-      std::string message = EncodeMessage(result);
-      std::cout << message;
-    } catch (std::exception e) {
-      HoverResponse result = newHoverResponse(request.id, "");
-      std::string message = EncodeMessage(result);
-      std::cout << message;
-    }
+    HoverResponse response = state.hover(request);
+    std::string message = EncodeMessage(response);
+    std::cout << message;
+
   } else if (method == "textDocument/formatting") {
     DocumentFormattingRequest request =
         jsonContent.get<DocumentFormattingRequest>();
-    std::string document = state.getDocument(request.params.textDocument.uri);
-    std::stringstream program(document);
-    try {
-      auto ast = FrontEnd::parse(program);
+    std::string uri = request.params.textDocument.uri;
+    auto ast = state.getUpdatedAst(request.params.textDocument.uri);
+    DocumentFormattingResponse response;
+    if (ast) {
       std::stringstream output;
-      FrontEnd::prettyprint(ast.get(), output);
-      auto result =
-          newDocumentFormattingResponse(request.id, document, output.str());
-      std::string message = EncodeMessage(result);
-      std::cout << message;
-    } catch (std::exception e) {
-      // TODO: Fix error handling here
-      LOG_S(INFO) << "Failed to format document";
+      FrontEnd::prettyprint(ast.value().get(), output);
+      response = newDocumentFormattingResponse(
+          request.id, state.getDocument(uri), output.str());
+    } else {
+      response = newNullDocumentFormattingResponse(request.id);
     }
+    std::string message = EncodeMessage(response);
+    std::cout << message;
   }
 }
 

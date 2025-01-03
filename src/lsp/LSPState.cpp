@@ -1,17 +1,46 @@
 #include "LSPState.h"
 #include "FrontEnd.h"
 #include "GetVariableNode.h"
+#include "ParseError.h"
 #include "SemanticAnalysis.h"
 #include "loguru.hpp"
 #include "messages.h"
+#include <optional>
 #include <sstream>
 
-void LSPState::openDocument(std::string uri, std::string text) {
+std::optional<ParseError> LSPState::openDocument(std::string uri,
+                                                 std::string text) {
   documents[uri] = text;
+  std::stringstream stream(text);
+  analysisResults[uri] = std::nullopt;
+
+  // Right now, the lsp will work off of the most recently properly parsed
+  // document when providing information If the parsing fails, it will be marked
+  // in the updatedAST map, some operations should work on the last correct AST
+  // while others should fail to return information if the ast is not up to date
+  try {
+    asts[uri] = FrontEnd::parse(stream);
+    updatedAst[uri] = true;
+  } catch (ParseError e) {
+    updatedAst[uri] = false;
+    return e;
+  }
+  return std::nullopt;
 }
 
-void LSPState::updateDocument(std::string uri, std::string text) {
+std::optional<ParseError> LSPState::updateDocument(std::string uri,
+                                                   std::string text) {
   documents[uri] = text;
+  std::stringstream stream(text);
+  analysisResults[uri] = std::nullopt;
+  try {
+    asts[uri] = FrontEnd::parse(stream);
+    updatedAst[uri] = true;
+  } catch (ParseError e) {
+    updatedAst[uri] = false;
+    return e;
+  }
+  return std::nullopt;
 }
 
 std::string LSPState::getDocument(std::string uri) { return documents[uri]; }
@@ -25,6 +54,23 @@ std::vector<std::string> LSPState::splitLines(const std::string &content) {
   }
   lines.push_back(content.substr(start));
   return lines;
+}
+
+// Returns most recent valid AST (if any)
+std::optional<std::shared_ptr<ASTProgram>> LSPState::getAst(std::string uri) {
+  if (asts.count(uri) != 0) {
+    return asts[uri];
+  }
+  return std::nullopt;
+}
+
+// Returns current AST if document is valid
+std::optional<std::shared_ptr<ASTProgram>>
+LSPState::getUpdatedAst(std::string uri) {
+  if (asts.count(uri) != 0 && updatedAst[uri]) {
+    return asts[uri];
+  }
+  return std::nullopt;
 }
 
 std::pair<int, std::string>
@@ -57,13 +103,16 @@ LSPState::getWordAtCursor(const std::string &content, int line, int character) {
 }
 
 HoverResponse LSPState::hover(HoverRequest request) {
-  std::string contents = documents[request.params.textDocument.uri];
+  std::string uri = request.params.textDocument.uri;
+  if (asts.count(uri) == 0) {
+    return newHoverResponse(request.id, "");
+  }
+  std::string contents = documents[uri];
   Position position = request.params.position;
   auto [start, token] =
       getWordAtCursor(contents, position.line, position.character);
 
-  std::stringstream inputStream(contents);
-  std::shared_ptr<ASTProgram> ast = FrontEnd::parse(inputStream);
+  auto ast = asts[request.params.textDocument.uri];
 
   GetVariableNode getVariableNode(token, position.line, start);
   ast->accept(&getVariableNode);
@@ -71,18 +120,25 @@ HoverResponse LSPState::hover(HoverRequest request) {
   std::stringstream ss;
   auto node = getVariableNode.getNode();
   if (node) {
-    auto analysisResults = SemanticAnalysis::analyze(ast.get(), false);
-    auto symbolTable = analysisResults->getSymbolTable();
+    std::shared_ptr<SemanticAnalysis> analysisResult;
+    if (analysisResults[uri]) {
+      analysisResult = analysisResults[uri].value();
+    } else {
+      analysisResult = SemanticAnalysis::analyze(ast.get(), false);
+      analysisResults[uri] = analysisResult;
+    }
+
+    auto symbolTable = analysisResult->getSymbolTable();
     if (getVariableNode.isFunction()) {
       auto fnType =
-          analysisResults->getTypeResults()->getInferredType(node.value());
+          analysisResult->getTypeResults()->getInferredType(node.value());
       std::stringstream typeName;
       typeName << token << ": " << *fnType;
       return newHoverResponse(request.id, typeName.str());
     } else {
+      start = std::time(NULL);
       auto varNode = symbolTable->getLocal(token, node.value());
-      auto varType =
-          analysisResults->getTypeResults()->getInferredType(varNode);
+      auto varType = analysisResult->getTypeResults()->getInferredType(varNode);
 
       std::stringstream typeName;
       typeName << token << ": " << *varType;
@@ -91,36 +147,4 @@ HoverResponse LSPState::hover(HoverRequest request) {
   } else {
     return newHoverResponse(request.id, "");
   }
-  // auto analysisResults = SemanticAnalysis::analyze(ast.get(), false);
-  // auto symbolTable = analysisResults->getSymbolTable();
-  // // Figure out if it is a function
-  // auto functions = symbolTable->getFunctions();
-  // for (auto fn : functions) {
-  //     if (fn->getName() == token) {
-  //         if (fn->getLine() - 1 == position.line && fn->getColumn() == start)
-  //         {
-  //             auto fnType =
-  //             analysisResults->getTypeResults()->getInferredType(fn);
-  //             std::stringstream typeName;
-  //             typeName << token << ": " << *fnType;
-  //             return newHoverResponse(request.id, typeName.str());
-  //         }
-  //     }
-
-  //     if (position.line < fn->getLine()) continue;
-
-  //     auto locals = symbolTable->getLocals(fn);
-  //     for (auto local : locals) {
-  //         if (local->getName() == token) {
-  //             if (local->getLine() - 1 == position.line && local->getColumn()
-  //             == start) {
-  //                 auto localType =
-  //                 analysisResults->getTypeResults()->getInferredType(local);
-  //                 std::stringstream typeName;
-  //                 typeName << token << ": " << *localType;
-  //                 return newHoverResponse(request.id, typeName.str());
-  //             }
-  //         }
-  //     }
-  // }
 }

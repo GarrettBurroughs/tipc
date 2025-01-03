@@ -17,3 +17,4 @@ PublishDiagnosticsNotification newPublishDiagnosticsNotificationEmpty(
 DocumentFormattingResponse newDocumentFormattingResponse(int id,
                                                          std::string original,
                                                          std::string contents);
+DocumentFormattingResponse newNullDocumentFormattingResponse(int id);

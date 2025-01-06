@@ -3,21 +3,32 @@
 #include "TextDocument.h"
 #include <optional>
 
+#define TIPLSP_VERSION "0.0.1"
+enum DiagnosticSeverity {
+  Error = 1,
+  Warning = 2,
+  Information = 3,
+  Hint = 4,
+};
+
 InitializeResponse newInitializeResponse(int id) {
   return InitializeResponse{
-      "2.0", id,
-      InitializeResult{ServerCapabilities{
-                           1,     // textDocumentSync
-                           true,  // hoverProvider
-                           false, // definitionProvide
-                           false, // codeActionProvider
-                           true,  // documentFormattingProvider
-                       },
-                       ServerInfo{"tiplsp", "0.0.1"}}};
+      .jsonrpc = "2.0",
+      .id = id,
+      .result = InitializeResult{
+          .capabilities = ServerCapabilities{.textDocumentSync = 1,
+                                             .hoverProvider = true,
+                                             .definitionProvider = false,
+                                             .codeActionProvider = false,
+                                             .documentFormattingProvider = true,
+                                             .completionProvider = {}},
+          .serverInfo =
+              ServerInfo{.name = "tiplsp", .version = TIPLSP_VERSION}}};
 };
 
 HoverResponse newHoverResponse(int id, std::string contents) {
-  return HoverResponse{"2.0", id, HoverResult{contents}};
+  return HoverResponse{
+      .jsonrpc = "2.0", .id = id, .result = HoverResult{.contents = contents}};
 };
 
 PublishDiagnosticsNotification newPublishDiagnosticsNotificationError(
@@ -39,12 +50,17 @@ PublishDiagnosticsNotification newPublishDiagnosticsNotificationError(
   std::string errorMsg = error.substr(0, atPos);
 
   return PublishDiagnosticsNotification{
-      "2.0", "textDocument/publishDiagnostics",
-      PublishDiagnosticsParams{
-          textDocument.uri,
-          textDocument.version,
-          {Diagnostic{Range{Position{line, column}, Position{line, column}}, 1,
-                      errorMsg}}}
+      .jsonrpc = "2.0",
+      .method = "textDocument/publishDiagnostics",
+      .params =
+          PublishDiagnosticsParams{
+              .uri = textDocument.uri,
+              .version = textDocument.version,
+              .diagnostics = {Diagnostic{
+                  .range = Range{.start = Position{line, column},
+                                 .end = Position{line, column}},
+                  .severity = Error,
+                  .message = errorMsg}}}
 
   };
 }
@@ -53,8 +69,11 @@ PublishDiagnosticsNotification newPublishDiagnosticsNotificationEmpty(
     VersionedTextDocumentIdentfier textDocument) {
 
   return PublishDiagnosticsNotification{
-      "2.0", "textDocument/publishDiagnostics",
-      PublishDiagnosticsParams{textDocument.uri, textDocument.version, {}}
+      .jsonrpc = "2.0",
+      .method = "textDocument/publishDiagnostics",
+      .params = PublishDiagnosticsParams{.uri = textDocument.uri,
+                                         .version = textDocument.version,
+                                         .diagnostics = {}}
 
   };
 }
@@ -84,9 +103,11 @@ DocumentFormattingResponse newDocumentFormattingResponse(int id,
                                          Position{endRow, endChar},
                                      },
                                      contents}};
-  return DocumentFormattingResponse{"2.0", id, formattedDocument};
+  return DocumentFormattingResponse{
+      .jsonrpc = "2.0", .id = id, .result = formattedDocument};
 }
 
 DocumentFormattingResponse newNullDocumentFormattingResponse(int id) {
-  return DocumentFormattingResponse{"2.0", id, std::nullopt};
+  return DocumentFormattingResponse{
+      .jsonrpc = "2.0", .id = id, .result = std::nullopt};
 }

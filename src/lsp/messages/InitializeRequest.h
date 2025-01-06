@@ -52,11 +52,12 @@ struct ServerCapabilities {
   bool definitionProvider;
   bool codeActionProvider;
   bool documentFormattingProvider;
-  // std::map<std::string, nlohmann::json> completionProvider;
+  std::map<std::string, nlohmann::json> completionProvider;
 
   NLOHMANN_DEFINE_TYPE_INTRUSIVE(ServerCapabilities, textDocumentSync,
                                  hoverProvider, definitionProvider,
-                                 codeActionProvider, documentFormattingProvider)
+                                 codeActionProvider, documentFormattingProvider,
+                                 completionProvider)
 };
 
 struct InitializeResult {

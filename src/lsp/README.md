@@ -1,10 +1,10 @@
 # TIPLSP
 
-This is the Language Server for the TIP language details for usage and development can be found here
+This is the Language Server for the TIP language. Details for usage and development can be found here
 
 ## Configuring 
 
-Before you configure the language server, you must first build the project in accordance to the steps in the main readme. This will produce the `tiplsp` executable in `build/src`. You should then add the `build/src` directory to your system PATH so that the extensions can pick up the executable.
+**Before you configure the language server, you must first build the project in accordance to the steps in the main [readme](../../README.md#building-tipc). This will produce the `tiplsp` executable in `build/src`. You should then add the `build/src` directory to your system PATH so that the extensions can pick up the executable.**
 
 
 The [language server protocol](https://microsoft.github.io/language-server-protocol/) is editor agnostic and many modern editors support it. Details
@@ -14,16 +14,18 @@ for setting up the TIP Language Server for two commonly used code editors [VSCod
 ### VSCode
 
 VSCode support comes from the Tip Language Extension:
-[https://marketplace.visualstudio.com/items?itemName=garrettburroughs.tip-language-extension](https://marketplace.visualstudio.com/items?itemName=garrettburroughs.tip-language-extension). If you are unfamiliar with installing extensions in VSCode you can read more [here](https://code.visualstudio.com/docs/editor/extension-marketplace). (It should also be findable by searching "TIP Language Extension" in the extension marketplace). 
+[https://marketplace.visualstudio.com/items?itemName=garrettburroughs.tip-language-extension](https://marketplace.visualstudio.com/items?itemName=garrettburroughs.tip-language-extension). (It should also be findable by searching "TIP Language Extension" in the extension marketplace)
+
+If you are unfamiliar with installing extensions in VSCode you can read more [here](https://code.visualstudio.com/docs/editor/extension-marketplace).
 
 
 ### Neovim
 
-*this section assumes you have some knowledge of editing neovim configurations, more info can be found
+*This section assumes you have some knowledge of editing neovim configurations, more info can be found
 [here](https://neovim.io/doc/user/editorconfig.html)*
 
 
-You must first configure Neovim to recognize the tip file type.
+You must first configure Neovim to recognize the tip file type:
 
 ```lua
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
@@ -59,7 +61,7 @@ lsp.setup() -- You only need one call to lsp.setup() at the end of all your lang
 ```
 
 
-If you do not wish to use `lspconfig` you can configure the server standalone by:
+If you do not wish to use `lspconfig` you can configure the server standalone with:
 
 ```lua
 local tipclient = vim.lsp.start_client {

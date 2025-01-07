@@ -3,6 +3,7 @@
 #include <nlohmann/json.hpp>
 #include <optional>
 #include <string>
+#include <vector>
 
 struct ClientInfo {
   std::string name;
@@ -46,13 +47,19 @@ struct ServerInfo {
   NLOHMANN_DEFINE_TYPE_INTRUSIVE(ServerInfo, name, version)
 };
 
+struct CompletionOptions {
+  std::vector<std::string> triggerCharacters;
+
+  NLOHMANN_DEFINE_TYPE_INTRUSIVE(CompletionOptions, triggerCharacters)
+};
+
 struct ServerCapabilities {
   int textDocumentSync;
   bool hoverProvider;
   bool definitionProvider;
   bool codeActionProvider;
   bool documentFormattingProvider;
-  std::map<std::string, nlohmann::json> completionProvider;
+  CompletionOptions completionProvider;
 
   NLOHMANN_DEFINE_TYPE_INTRUSIVE(ServerCapabilities, textDocumentSync,
                                  hoverProvider, definitionProvider,

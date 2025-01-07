@@ -1,5 +1,7 @@
 #include "LSPState.h"
+#include "ASTDeclNode.h"
 #include "ASTProgram.h"
+#include "CompletionRequest.h"
 #include "FrontEnd.h"
 #include "GetVariableNode.h"
 #include "ParseError.h"
@@ -19,16 +21,19 @@
 auto runBackgroundSemanticAnalysis(
     std::string uri, std::shared_ptr<ASTProgram> ast, int version,
     std::mutex &lock,
+    std::map<std::string, std::shared_ptr<SemanticAnalysis>> &analysisMap,
     std::map<std::string, std::optional<std::shared_ptr<SemanticAnalysis>>>
-        &analysisMap,
+        &updatedAnalysisMap,
     std::map<std::string, int> &versionMap, std::mutex &writeLock) {
   std::function<void()> update = [uri, ast, version, &lock, &analysisMap,
-                                  &versionMap, &writeLock]() {
+                                  &updatedAnalysisMap, &versionMap,
+                                  &writeLock]() {
     try {
       auto analysisResult = SemanticAnalysis::analyze(ast.get(), false);
 
       if (version == versionMap[uri]) {
         lock.lock();
+        updatedAnalysisMap[uri] = analysisResult;
         analysisMap[uri] = analysisResult;
         lock.unlock();
 
@@ -65,7 +70,7 @@ std::optional<ParseError> LSPState::openDocument(std::string uri,
   versions[uri] = 0;
   documents[uri] = text;
   std::stringstream stream(text);
-  analysisResults[uri] = std::nullopt;
+  updatedAnalysisResults[uri] = std::nullopt;
 
   // Right now, the lsp will work off of the most recently properly parsed
   // document when providing information If the parsing fails, it will be marked
@@ -82,7 +87,7 @@ std::optional<ParseError> LSPState::openDocument(std::string uri,
   lock.unlock();
   LOG_S(INFO) << "Running Semantic Analysis";
   runBackgroundSemanticAnalysis(uri, asts[uri], 0, lock, analysisResults,
-                                versions, writeLock);
+                                updatedAnalysisResults, versions, writeLock);
   return std::nullopt;
 }
 
@@ -92,7 +97,7 @@ LSPState::updateDocument(std::string uri, std::string text, int version) {
   documents[uri] = text;
   versions[uri] = version;
   std::stringstream stream(text);
-  analysisResults[uri] = std::nullopt;
+  updatedAnalysisResults[uri] = std::nullopt;
   try {
     asts[uri] = FrontEnd::parse(stream);
     updatedAst[uri] = true;
@@ -104,7 +109,7 @@ LSPState::updateDocument(std::string uri, std::string text, int version) {
   lock.unlock();
   LOG_S(INFO) << "Running Semantic Analysis";
   runBackgroundSemanticAnalysis(uri, asts[uri], version, lock, analysisResults,
-                                versions, writeLock);
+                                updatedAnalysisResults, versions, writeLock);
   return std::nullopt;
 }
 
@@ -186,13 +191,13 @@ HoverResponse LSPState::hover(HoverRequest request) {
   auto node = getVariableNode.getNode();
   if (node) {
     std::shared_ptr<SemanticAnalysis> analysisResult;
-    if (analysisResults[uri]) {
-      analysisResult = analysisResults[uri].value();
+    if (updatedAnalysisResults[uri]) {
+      analysisResult = updatedAnalysisResults[uri].value();
     } else {
       try {
         analysisResult = SemanticAnalysis::analyze(ast.get(), false);
         lock.lock();
-        analysisResults[uri] = analysisResult;
+        updatedAnalysisResults[uri] = analysisResult;
         lock.unlock();
       } catch (SemanticError e) {
         return newHoverResponse(request.id, "");
@@ -218,4 +223,55 @@ HoverResponse LSPState::hover(HoverRequest request) {
   } else {
     return newHoverResponse(request.id, "");
   }
+}
+
+CompletionResponse LSPState::autocomplete(CompletionRequest request) {
+  auto uri = request.params.textDocument.uri;
+  if (analysisResults.count(uri) == 0) {
+    return newCompletionResponse(request.id, {});
+  }
+
+  std::vector<CompletionItem> items;
+
+  std::shared_ptr<SemanticAnalysis> analysis = analysisResults[uri];
+  std::shared_ptr<ASTProgram> ast = asts[uri];
+  auto symbolTable = analysis->getSymbolTable();
+  auto functions = symbolTable->getFunctions();
+  auto typeInfo = analysis->getTypeResults();
+
+  // Any function can be called at (almost) any time, so we supply all of them
+  // May want to limit this to if in a function body
+  for (const ASTDeclNode *fn : functions) {
+    auto fnName = fn->getName();
+    auto decl = ast->findFunctionByName(fnName);
+    auto formals = decl->getFormals();
+
+    std::ostringstream insertText;
+    insertText << fnName << "(";
+
+    if (formals.size() > 0) {
+      int i = 0;
+      for (; i < formals.size() - 1; i++) {
+        auto formal = formals[i];
+        insertText << "${" << i << ":" << formal->getName() << "}"
+                   << ",";
+      }
+      insertText << "${" << i << ":" << formals[i]->getName() << "}";
+    }
+    insertText << ")";
+
+    auto fnType = typeInfo->getInferredType((ASTDeclNode *)fn);
+    std::ostringstream detail;
+    detail << fnName << ": " << *fnType;
+    items.push_back(CompletionItem{
+        .label = fnName,
+        .detail = detail.str(), // TOOD (Add more detail)
+        .insertText = insertText.str(),
+        .kind = CompletionItemKind::Function,
+        .insertTextFormat = InsertTextFormat::Snippet,
+    });
+  }
+
+  CompletionResponse response = newCompletionResponse(request.id, items);
+  return response;
 }

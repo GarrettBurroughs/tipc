@@ -2,10 +2,16 @@
 
 #include "TextDocument.h"
 
+enum class DiagnosticSeverity {
+  Error = 1,
+  Warning = 2,
+  Information = 3,
+  Hint = 4,
+};
+
 struct Diagnostic {
   Range range;
-  // TODO: Severity
-  int severity;
+  DiagnosticSeverity severity;
   std::string message;
 
   NLOHMANN_DEFINE_TYPE_INTRUSIVE(Diagnostic, range, severity, message);

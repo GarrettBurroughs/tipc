@@ -15,9 +15,7 @@
 
 #include "LSPState.h"
 #include "RPC.h"
-#include "messages/DocumentFormattingRequest.h"
-#include "messages/HoverRequest.h"
-#include "messages/PublishDiagnosticsNotification.h"
+#include "messages/CompletionRequest.h"
 #include "messages/messages.h"
 
 using json = nlohmann::json;
@@ -66,22 +64,30 @@ void handleMessage(LSPState &state, std::string method,
       auto error = state.updateDocument(request.params.textDocument.uri,
                                         changeEvent.text,
                                         request.params.textDocument.version);
-      PublishDiagnosticsNotification diagnosticsNotification;
       if (error) {
-        diagnosticsNotification = newPublishDiagnosticsNotificationError(
-            request.params.textDocument, error.value().what());
+        // Here we publish any parsing errors
+        // Any parsing errors will be cleared if the semantic check later
+        // finishes without any errors
+        PublishDiagnosticsNotification diagnosticsNotification =
+            newPublishDiagnosticsNotificationError(request.params.textDocument,
+                                                   error.value().what());
+        transmitMessage(diagnosticsNotification, writeLock);
       }
-      /* else { */
-      /*     diagnosticsNotification =
-       * newPublishDiagnosticsNotificationEmpty(request.params.textDocument); */
-      /* } */
-      transmitMessage(diagnosticsNotification, writeLock);
     }
     LOG_S(INFO) << "Changed: " << request.params.textDocument.uri;
 
   } else if (method == "textDocument/hover") {
     HoverRequest request = jsonContent.get<HoverRequest>();
     HoverResponse response = state.hover(request);
+    transmitMessage(response, writeLock);
+
+    LOG_S(INFO) << "Hover Request for: " << request.params.textDocument.uri
+                << "@" << request.params.position.line << ":"
+                << request.params.position.character;
+
+  } else if (method == "textDocument/completion") {
+    CompletionRequest request = jsonContent.get<CompletionRequest>();
+    auto response = state.autocomplete(request);
     transmitMessage(response, writeLock);
 
   } else if (method == "textDocument/formatting") {

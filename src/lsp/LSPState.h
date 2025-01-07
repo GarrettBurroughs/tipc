@@ -3,6 +3,7 @@
 #include "ASTProgram.h"
 #include "ParseError.h"
 #include "SemanticAnalysis.h"
+#include "messages/CompletionRequest.h"
 #include "messages/HoverRequest.h"
 #include <map>
 #include <mutex>
@@ -16,8 +17,9 @@ private:
   // Stores whether or not the current AST represents the most up to date
   // document
   std::map<std::string, bool> updatedAst;
+  std::map<std::string, std::shared_ptr<SemanticAnalysis>> analysisResults;
   std::map<std::string, std::optional<std::shared_ptr<SemanticAnalysis>>>
-      analysisResults;
+      updatedAnalysisResults;
   std::map<std::string, int> versions;
   std::mutex lock;
   std::mutex &writeLock;
@@ -35,4 +37,5 @@ public:
   std::optional<std::shared_ptr<ASTProgram>> getAst(std::string uri);
   std::optional<std::shared_ptr<ASTProgram>> getUpdatedAst(std::string uri);
   HoverResponse hover(HoverRequest request);
+  CompletionResponse autocomplete(CompletionRequest request);
 };

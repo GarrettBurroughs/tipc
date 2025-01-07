@@ -10,27 +10,27 @@ struct HoverParams {
   NLOHMANN_DEFINE_TYPE_INTRUSIVE(HoverParams, textDocument, position)
 };
 
-struct HoverResult {
+struct CompletionResult {
   std::string contents;
 
-  NLOHMANN_DEFINE_TYPE_INTRUSIVE(HoverResult, contents)
+  NLOHMANN_DEFINE_TYPE_INTRUSIVE(CompletionResult, contents)
 };
 
-struct HoverRequest {
+struct CompletionRequest {
   int id;
   std::string jsonrpc;
 
   HoverParams params;
 
-  NLOHMANN_DEFINE_TYPE_INTRUSIVE(HoverRequest, id, jsonrpc, params)
+  NLOHMANN_DEFINE_TYPE_INTRUSIVE(CompletionRequest, id, jsonrpc, params)
 };
 
-struct HoverResponse {
+struct CompletionResponse {
   std::string jsonrpc;
   std::optional<int> id;
-  HoverResult result;
+  CompletionResult result;
 
-  friend void to_json(nlohmann::json &j, const HoverResponse &r) {
+  friend void to_json(nlohmann::json &j, const CompletionResponse &r) {
     j["jsonrpc"] = r.jsonrpc;
     j["result"] = r.result;
     if (r.id) {
@@ -38,13 +38,13 @@ struct HoverResponse {
     }
   }
 
-  friend void from_json(const nlohmann::json &j, HoverResponse &r) {
+  friend void from_json(const nlohmann::json &j, CompletionResponse &r) {
     if (j.contains("id")) {
       r.id = j.at("id").get<int>();
     } else {
       r.id = std::nullopt;
     }
     r.jsonrpc = j.at("jsonrpc").get<std::string>();
-    r.result = j.at("result").get<HoverResult>();
+    r.result = j.at("result").get<CompletionResult>();
   }
 };
